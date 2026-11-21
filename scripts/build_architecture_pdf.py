@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from xml.sax.saxutils import escape
 
 from reportlab.graphics.shapes import Drawing, Line, Polygon, Rect, String
 from reportlab.lib import colors
@@ -18,7 +19,7 @@ OUTPUT = ROOT / "architecture.pdf"
 
 
 def diagram() -> Drawing:
-    width, height = 510, 120
+    width, height = 500, 120
     drawing = Drawing(width, height)
     boxes = [
         ("Sources", ["YC-OSS AI (1,906)", "arXiv API", "RSS feeds", "job-board APIs"]),
@@ -28,7 +29,7 @@ def diagram() -> Drawing:
         ("Intelligence", ["GitHub stars", "entity resolution", "LLM fallback"]),
         ("Delivery", ["CSV / JSONL", "quality report", "six-tab Sheets"]),
     ]
-    box_width, box_height, gap = 78, 70, 8
+    box_width, box_height, gap = 76, 70, 7.4
     y = 34
     for index, (title, lines) in enumerate(boxes):
         x = index * (box_width + gap)
@@ -52,20 +53,38 @@ def build() -> None:
     h2 = ParagraphStyle("H2", parent=styles["Heading2"], fontName="Helvetica-Bold", fontSize=10.5, leading=13, spaceBefore=7, spaceAfter=3, textColor=colors.HexColor("#17365d"))
     subtitle = ParagraphStyle("Subtitle", parent=body, fontSize=9, textColor=colors.HexColor("#555555"), spaceAfter=10)
 
+    table_cell = ParagraphStyle(
+        "TableCell",
+        parent=body,
+        fontSize=7.3,
+        leading=8.9,
+        spaceBefore=0,
+        spaceAfter=0,
+        splitLongWords=1,
+    )
+    table_header = ParagraphStyle(
+        "TableHeader",
+        parent=table_cell,
+        fontName="Helvetica-Bold",
+        textColor=colors.HexColor("#17365d"),
+    )
+
     def table(rows, widths, header=True):
+        wrapped = []
+        for row_index, row in enumerate(rows):
+            cell_style = table_header if header and row_index == 0 else table_cell
+            wrapped.append([Paragraph(escape(str(cell)), cell_style) for cell in row])
         style = [
             ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#b8c6da")),
             ("VALIGN", (0, 0), (-1, -1), "TOP"),
-            ("FONTSIZE", (0, 0), (-1, -1), 7.4),
-            ("LEADING", (0, 0), (-1, -1), 9),
             ("LEFTPADDING", (0, 0), (-1, -1), 4),
             ("RIGHTPADDING", (0, 0), (-1, -1), 4),
-            ("TOPPADDING", (0, 0), (-1, -1), 3),
-            ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+            ("TOPPADDING", (0, 0), (-1, -1), 3.5),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 3.5),
         ]
         if header:
-            style += [("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e6eef9")), ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold")]
-        t = Table(rows, colWidths=widths, repeatRows=1 if header else 0)
+            style.append(("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#e6eef9")))
+        t = Table(wrapped, colWidths=widths, repeatRows=1 if header else 0)
         t.setStyle(TableStyle(style))
         return t
 
@@ -185,6 +204,17 @@ def build() -> None:
         ),
     ]
 
+    def footer(canvas, doc):
+        canvas.saveState()
+        canvas.setStrokeColor(colors.HexColor("#d5dce7"))
+        canvas.setLineWidth(0.4)
+        canvas.line(1.55 * cm, 1.02 * cm, A4[0] - 1.55 * cm, 1.02 * cm)
+        canvas.setFont("Helvetica", 6.8)
+        canvas.setFillColor(colors.HexColor("#777777"))
+        canvas.drawString(1.55 * cm, 0.72 * cm, "FrontierAtlas — Architecture")
+        canvas.drawRightString(A4[0] - 1.55 * cm, 0.72 * cm, f"Page {doc.page}")
+        canvas.restoreState()
+
     doc = SimpleDocTemplate(
         str(OUTPUT),
         pagesize=A4,
@@ -196,7 +226,7 @@ def build() -> None:
         author="Arghya Bose",
         subject="GraphOne / FrontierAtlas AI Engineer assessment",
     )
-    doc.build(story)
+    doc.build(story, onFirstPage=footer, onLaterPages=footer)
     print(f"wrote {OUTPUT}")
 
 
