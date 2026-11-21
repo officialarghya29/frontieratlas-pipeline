@@ -175,15 +175,7 @@ def hero() -> None:
     centre = (0.735, 0.52)
     for ring, alpha in [(0.07, 0.40), (0.14, 0.26), (0.21, 0.17), (0.29, 0.11), (0.38, 0.07)]:
         ax.add_patch(Circle(centre, ring, fill=False, edgecolor=CYAN, lw=0.9, alpha=alpha, zorder=2))
-    for angle in np.linspace(0, math.tau, 7)[:-1]:
-        ax.plot(
-            [centre[0] + 0.12 * math.cos(angle), centre[0] + 0.43 * math.cos(angle)],
-            [centre[1] + 0.12 * math.sin(angle), centre[1] + 0.43 * math.sin(angle)],
-            color=CYAN,
-            alpha=0.12,
-            lw=0.7,
-            zorder=2,
-        )
+    # No radial spokes: the horizontal spoke would cut through the copy.
 
     # A deterministic constellation around the core.
     rng = np.random.default_rng(7)
