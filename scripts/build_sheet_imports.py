@@ -11,7 +11,6 @@ from __future__ import annotations
 import csv
 import json
 import shutil
-from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,8 +56,9 @@ def main() -> int:
 
     workbook = EXPORTS / "FrontierAtlas_submission.xlsx"
     shutil.copyfile(workbook, DEST / "FrontierAtlas_Google_Sheets_Upload.xlsx")
+    quality = json.loads((EXPORTS / "data_quality_report.json").read_text(encoding="utf-8"))
     manifest = {
-        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "generated_at": quality["generated_at"],
         "workbook": "FrontierAtlas_Google_Sheets_Upload.xlsx",
         "total_data_rows": sum(tab["rows"] for tab in tabs),
         "tabs": tabs,

@@ -21,7 +21,7 @@ Built by **Arghya Bose** · 21 November 2026 · [Repository](https://github.com/
 | News | **16** | AI articles inside the same 24-hour window |
 | Entity mapping log | **2,490** | Every product-to-startup decision, including the ones I refused to make |
 
-**5,928 canonical records** · **15 enabled sources** · **29.55-second collection run** · **53 passing tests** · **13/13 preflight checks**
+**5,928 canonical records** · **15 enabled sources** · **29.55-second collection run** · **53 passing tests** · **14/14 preflight checks**
 
 <p align="center">
   <img src="assets/readme/01_dataset_at_a_glance.png" alt="Bar chart of 1,894 startups, 2,490 products, 1,314 papers, 214 jobs and 16 news records" width="100%">

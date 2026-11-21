@@ -22,7 +22,7 @@
   "llm_ready": false,
   "workbook": "data/exports/FrontierAtlas_submission.xlsx",
   "external_actions_required": [
-    "Google Sheet: upload data/exports/FrontierAtlas_submission.xlsx to Google Drive, open with Google Sheets, share 'Anyone with the link' (Viewer), paste the URL into the form.",
+    "Google Sheet: upload data/google_sheets/FrontierAtlas_Google_Sheets_Upload.xlsx to Google Drive, open with Google Sheets, share 'Anyone with the link' (Viewer), paste the URL into the form. The step-by-step guide is data/google_sheets/00_START_HERE.md.",
     "LLM extraction: set GEMINI_API_KEY/GROQ_API_KEY/DEEPSEEK_API_KEY and run python scripts/extract_llm.py, then re-export and rebuild the workbook."
   ],
   "checks": [
@@ -65,6 +65,11 @@
       "check": "workbook contents",
       "ok": true,
       "detail": "six tabs, headers and row counts match"
+    },
+    {
+      "check": "Google Sheets handoff",
+      "ok": true,
+      "detail": "six CSVs + workbook verified; 8,418 rows"
     },
     {
       "check": "architecture PDF",

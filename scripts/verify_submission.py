@@ -9,6 +9,7 @@ never silently treated as complete.
 
 from __future__ import annotations
 
+import csv
 import hashlib
 import json
 import os
@@ -183,6 +184,59 @@ def main() -> int:
             workbook.close()
     check("workbook contents", workbook_ok, workbook_detail)
 
+    handoff_dir = ROOT / "data" / "google_sheets"
+    handoff_ok = False
+    handoff_detail = "missing"
+    if handoff_dir.is_dir():
+        try:
+            problems: list[str] = []
+            for filename in ("00_START_HERE.md", "FrontierAtlas_Google_Sheets_Upload.xlsx", "tab_manifest.json"):
+                if not (handoff_dir / filename).is_file():
+                    problems.append(f"missing {filename}")
+            quality_path = settings.export_dir / "data_quality_report.json"
+            quality = json.loads(quality_path.read_text(encoding="utf-8"))
+            handoff = json.loads((handoff_dir / "tab_manifest.json").read_text(encoding="utf-8"))
+            if handoff.get("generated_at") != quality.get("generated_at"):
+                problems.append("manifest timestamp does not match data snapshot")
+            handoff_tabs = handoff.get("tabs") or []
+            if [item.get("tab") for item in handoff_tabs] != TABS:
+                problems.append("tab order")
+            total_rows = 0
+            for item in handoff_tabs:
+                tab = str(item.get("tab") or "")
+                filename = str(item.get("file") or "")
+                path = handoff_dir / filename
+                expected = payloads.get(tab, {"headers": [], "rows": []})
+                if not path.is_file():
+                    problems.append(f"missing {filename}")
+                    continue
+                with path.open(newline="", encoding="utf-8") as handle:
+                    reader = csv.reader(handle)
+                    header = next(reader, [])
+                    row_count = sum(1 for _ in reader)
+                if header != expected["headers"]:
+                    problems.append(f"{tab}: headers")
+                if row_count != len(expected["rows"]):
+                    problems.append(f"{tab}: rows {row_count}/{len(expected['rows'])}")
+                if item.get("rows") != row_count:
+                    problems.append(f"{tab}: manifest rows")
+                total_rows += row_count
+            if handoff.get("total_data_rows") != total_rows:
+                problems.append(f"total rows {handoff.get('total_data_rows')}/{total_rows}")
+            canonical_copy = handoff_dir / "FrontierAtlas_Google_Sheets_Upload.xlsx"
+            if workbook_path.exists() and canonical_copy.is_file():
+                if hashlib.sha256(canonical_copy.read_bytes()).hexdigest() != hashlib.sha256(workbook_path.read_bytes()).hexdigest():
+                    problems.append("workbook copy hash")
+            handoff_ok = not problems
+            handoff_detail = (
+                f"six CSVs + workbook verified; {total_rows:,} rows"
+                if handoff_ok
+                else "; ".join(problems[:4])
+            )
+        except Exception as exc:  # noqa: BLE001 - malformed handoff is a failed check
+            handoff_detail = f"invalid handoff: {type(exc).__name__}: {exc}"
+    check("Google Sheets handoff", handoff_ok, handoff_detail)
+
     pdf_pages = 0
     pdf_path = ROOT / "architecture.pdf"
     if pdf_path.exists():
@@ -246,8 +300,9 @@ def main() -> int:
     external_actions: list[str] = []
     if not sheet_ready:
         external_actions.append(
-            "Google Sheet: upload data/exports/FrontierAtlas_submission.xlsx to Google Drive, "
-            "open with Google Sheets, share 'Anyone with the link' (Viewer), paste the URL into the form."
+            "Google Sheet: upload data/google_sheets/FrontierAtlas_Google_Sheets_Upload.xlsx to Google Drive, "
+            "open with Google Sheets, share 'Anyone with the link' (Viewer), paste the URL into the form. "
+            "The step-by-step guide is data/google_sheets/00_START_HERE.md."
         )
     if not llm_ready:
         external_actions.append(

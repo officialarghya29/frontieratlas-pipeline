@@ -123,7 +123,7 @@ The extractor accepts only evidence-backed values that pass schema validation; e
 python scripts/verify_submission.py
 ```
 
-Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, manifest file hashes and row counts, workbook headers and row counts, PDF page count, test results, every commit's author/committer identity, AI attribution across all commit messages, repository secret scan, and writes [`data/exports/submission_summary.json`](data/exports/submission_summary.json). The latest snapshot has **13 checks and 0 failures**. Missing Google/LLM credentials are reported as external actions, not hidden.
+Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, manifest file hashes and row counts, workbook headers and row counts, the Google Sheets handoff folder and workbook copy, PDF page count, test results, every commit's author/committer identity, AI attribution across all commit messages, repository secret scan, and writes [`data/exports/submission_summary.json`](data/exports/submission_summary.json). The latest snapshot has **14 checks and 0 failures**. Missing Google/LLM credentials are reported as external actions, not hidden.
 
 Freshness note: the 24-hour checks apply to the committed collection run dated **2026-11-21**. If you submit on a later date, rerun collection and preflight; do not present this snapshot as live 24-hour data.
 
