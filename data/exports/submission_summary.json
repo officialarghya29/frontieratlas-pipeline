@@ -57,9 +57,14 @@
       "detail": "findings=[]"
     },
     {
-      "check": "workbook tabs",
+      "check": "export manifest",
       "ok": true,
-      "detail": "tabs=['Startups', 'Products', 'Research Papers', 'Jobs', 'News', 'Entity Mapping Log']"
+      "detail": "12 file hashes verified; database=data/frontieratlas.db"
+    },
+    {
+      "check": "workbook contents",
+      "ok": true,
+      "detail": "six tabs, headers and row counts match"
     },
     {
       "check": "architecture PDF",
@@ -74,12 +79,12 @@
     {
       "check": "commit identity",
       "ok": true,
-      "detail": "Arghya Bose <officialarghya29@gmail.com>"
+      "detail": "all commits under Arghya Bose <officialarghya29@gmail.com>"
     },
     {
       "check": "no AI attribution",
       "ok": true,
-      "detail": "commit message clean"
+      "detail": "all commit messages clean"
     },
     {
       "check": "repository secret scan",

@@ -17,7 +17,7 @@ FrontierAtlas collects, normalizes, resolves, enriches and exports real AI-ecosy
 | Research papers | **1,314** | Unique arXiv IDs across cs.AI, cs.LG, cs.CL, cs.CV, cs.RO |
 | Jobs | **214** | Himalayas 43, Arbeitnow 107, Jobicy 64 (all publication-verified within 24h) |
 | News | **16** | TechCrunch 5, The Verge 4, WIRED 4, Ars Technica 1, MIT Technology Review 2 (all within 24h) |
-| Entity Mapping Log | **2,490** | 10 auto-matched, 67 review-required, 2,413 no-match |
+| Entity Mapping Log | **2,490** | 6 auto-matched, 71 review-required, 2,413 no-match |
 
 All 5,928 canonical records pass schema validation. **Zero** fabricated records, repositories, star counts, dates or URLs are included.
 
@@ -68,8 +68,6 @@ The full technical rationale, including 500k-record scaling, 413/429 handling, a
 ```text
 src/frontieratlas/
   collectors/      YC, arXiv, Product Hunt, Show HN, HF Spaces, 5 RSS feeds, 5 job boards
-  parsers/         (feed parsing lives with its collector)
-  normalizers/     text/URL/name normalization in common/
   extractors/      provider-independent LLM orchestration (Gemini→Groq→DeepSeek)
   resolvers/       exact, alias, domain and fuzzy entity resolution
   enrichers/       GitHub repository star enrichment
@@ -81,6 +79,7 @@ config/
   settings.yaml    runtime, freshness, LLM and resolution thresholds
   sources.yaml     every source, access method, terms, limits, date semantics
   seed_entities.txt  matching assistance only (never exported)
+pyproject.toml     installable package metadata (`pip install -e . --no-deps`)
 scripts/
   collect_all.py   full async collection
   enrich_github.py GitHub stars for explicit paper repositories
@@ -132,6 +131,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+pip install -e . --no-deps
 cp .env.example .env
 ```
 
@@ -203,7 +203,7 @@ python scripts/export_all.py
 # Credential-free six-tab workbook for Google Sheets upload
 python scripts/build_submission_workbook.py
 
-# Preflight every submission requirement (counts, schemas, PDF, tests, identity, secrets)
+# Preflight every submission requirement (counts, schemas, manifest hashes, workbook rows, PDF, tests, all commit identities, secrets)
 python scripts/verify_submission.py
 
 # Measured local upsert throughput (synthetic rows, isolated DB, deleted after)
@@ -248,6 +248,8 @@ Required Google setup: create a service account, enable the **Google Sheets API*
 
 Verify the six tab names and these row counts: Startups 1,894; Products 2,490; Research Papers 1,314; Jobs 214; News 16; Entity Mapping Log 2,490.
 
+Long workbook cells are capped at 4,000 characters per cell to stay within the Sheets API request budget; the CSV/JSONL exports retain full values.
+
 ### API path (automatic)
 
 ```bash
@@ -271,9 +273,9 @@ python scripts/export_sheets.py --dry-run  # validate payloads without credentia
 
 ## Entity resolution
 
-Matching order: exact normalized name → verified alias (YC former names) → non-shared website-domain equality → fuzzy token-set with length and character-ratio guards. Thresholds live in `config/settings.yaml`.
+Matching order: exact normalized name → verified alias (YC former names) → non-shared website-domain equality → fuzzy token-set with length and character-ratio guards. Single-token aliases are review-only because they collide with generic product titles; multi-token aliases may auto-match. Thresholds live in `config/settings.yaml`.
 
-At run time: 2,490 products produced 10 auto-matches (6 domain, 4 alias), 67 review-required and 2,413 no-match. Every decision — including no-match — is recorded with raw name, canonical name, method, score, decision, review flag, timestamp and evidence notes.
+At run time: 2,490 products produced 6 auto-matches (all six from non-shared domain equality), 71 review-required and 2,413 no-match. Single-token aliases are deliberately review-only because names such as `BOOM` or `Trellis` collide with unrelated products. Every decision — including no-match — is recorded with raw name, canonical name, method, score, decision, review flag, timestamp and evidence notes.
 
 ## Known limitations
 
@@ -281,7 +283,7 @@ At run time: 2,490 products produced 10 auto-matches (6 domain, 4 alias), 67 rev
 2. **LLM extraction not executed** — implemented with Gemini→Groq→DeepSeek fallback, 413 chunking and 429 backoff, and unit-tested with mocked providers, but no API keys were supplied. Records remain valid with deterministic fields; pricing is `UNKNOWN` where unverified.
 3. **Remotive and Remote OK produced zero accepted jobs** — Remotive's `publication_date` has no timezone (cannot be 24h-verified), and Remote OK's listings were all older than 24h at run time. Both remain monitored and documented rather than relaxed.
 4. **Product quality is source-shaped** — Show HN and HF Spaces are public launch/app sources, not a commercial product database. Product Hunt's public feed supplied only 19 AI-relevant launches. Pricing is therefore mostly `UNKNOWN`.
-5. **Entity association is conservative** — most products are launch titles, not canonical company names; 67 ambiguous candidates await manual review.
+5. **Entity association is conservative** — most products are launch titles, not canonical company names; 71 ambiguous candidates await manual review, including all single-token alias matches.
 6. **SQLite is local-development storage** — production PostgreSQL, task queues and distributed workers are an architectural migration path, not implemented at 500k scale.
 7. **No 500k claim** — only the 5,928 rows collected here were processed; `scripts/benchmark.py` measures local write throughput separately and does not constitute a 500k test.
 8. **GitHub enrichment partial** — 164/170 explicit repositories verified; 4 were missing/deleted and 2 did not match the requested repository name. Star counts remain `null` rather than guessed.
@@ -299,6 +301,7 @@ At run time: 2,490 products produced 10 auto-matches (6 domain, 4 alias), 67 rev
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e . --no-deps                 # makes `import frontieratlas` available
 cp .env.example .env                      # optional keys only
 python scripts/collect_all.py             # 15 enabled collectors, real data
 python scripts/enrich_github.py           # optional GITHUB_TOKEN

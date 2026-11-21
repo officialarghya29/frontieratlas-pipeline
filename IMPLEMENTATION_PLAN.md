@@ -34,7 +34,7 @@
 - Conservative system prompt; evidence-backed extraction; null when unsupported.
 - Without keys, extraction is marked pending and records remain valid; no invented fields.
 - Entity resolution: exact, alias, non-shared domain, strictly guarded fuzzy; every decision logged.
-- Actual result: 10 auto-matched, 67 review-required, 2,413 no-match; 2,490 mapping rows.
+- Actual result: 6 auto-matched (all non-shared domain evidence), 71 review-required, 2,413 no-match; 2,490 mapping rows.
 
 ## Phase 4 — Storage and exports (completed)
 

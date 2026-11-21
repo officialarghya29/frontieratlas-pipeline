@@ -84,6 +84,7 @@ class ExtractionResult:
     chunks: int = 0
     pending_reason: str | None = None
     conflicts: list[str] = field(default_factory=list)
+    evidence: dict[str, Any] = field(default_factory=dict)
 
 
 def chunk_text(text: str, target_chars: int = 12000, overlap_chars: int = 600) -> list[str]:
@@ -299,6 +300,7 @@ class LLMExtractor:
             )
 
         merged, conflicts = merge_json_records(parsed)
+        evidence = merged.get("evidence") if isinstance(merged.get("evidence"), dict) else {}
         if merged.get("valid_entity") is False:
             return ExtractionResult(
                 False,
@@ -308,9 +310,18 @@ class LLMExtractor:
                 chunks=len(chunks),
                 pending_reason=str(merged.get("reason") or "source does not support the entity"),
                 conflicts=conflicts,
+                evidence=evidence,
             )
         record = merged.get("record") if isinstance(merged.get("record"), dict) else merged
-        return ExtractionResult(True, record, used_provider, attempts=attempts, chunks=len(chunks), conflicts=conflicts)
+        return ExtractionResult(
+            True,
+            record,
+            used_provider,
+            attempts=attempts,
+            chunks=len(chunks),
+            conflicts=conflicts,
+            evidence=evidence,
+        )
 
     async def _extract_chunk(self, text: str, schema_hint: str, depth: int) -> tuple[dict, str]:
         prompt = f"{schema_hint}\n\nSOURCE CONTENT:\n{text}"

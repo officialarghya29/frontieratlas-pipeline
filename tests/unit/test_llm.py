@@ -81,7 +81,13 @@ async def test_429_backoff_then_success():
         if state["first"]:
             state["first"] = False
             raise RateLimitedError(url, 429, retry_after=0)
-        return gemini_response({"valid_entity": True, "record": {"pricingModel": "FREEMIUM"}})
+        return gemini_response(
+            {
+                "valid_entity": True,
+                "record": {"pricingModel": "FREEMIUM"},
+                "evidence": {"pricingModel": "source says freemium"},
+            }
+        )
 
     client = FakeLLMClient(handler)
     extractor = LLMExtractor(
@@ -93,6 +99,7 @@ async def test_429_backoff_then_success():
     result = await extractor.extract("A product description.", "schema")
     assert result.valid_entity is True
     assert result.provider == "gemini"
+    assert result.evidence["pricingModel"] == "source says freemium"
     assert len(client.calls) == 2
     assert sleeps
 

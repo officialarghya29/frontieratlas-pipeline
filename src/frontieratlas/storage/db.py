@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterator
 
+from ..common.config import display_path
 from ..common.text import content_hash
 from ..schemas import EntityMapping
 
@@ -162,7 +163,7 @@ class Database:
 
         with self.transaction() as connection:
             existing = connection.execute(
-                "SELECT content_hash FROM records WHERE record_id = ?", (record_id,)
+                "SELECT content_hash, payload FROM records WHERE record_id = ?", (record_id,)
             ).fetchone()
             if existing is None:
                 connection.execute(
@@ -181,7 +182,7 @@ class Database:
             connection.execute(
                 """INSERT INTO record_revisions (record_id, content_hash, payload, observed_at)
                    VALUES (?, ?, ?, ?)""",
-                (record_id, existing["content_hash"], payload, now),
+                (record_id, existing["content_hash"], existing["payload"], now),
             )
             connection.execute(
                 """UPDATE records
@@ -202,7 +203,7 @@ class Database:
                 payload = json.dumps(record, ensure_ascii=False, sort_keys=True)
                 digest = content_hash(record)
                 existing = connection.execute(
-                    "SELECT content_hash FROM records WHERE record_id = ?", (record_id,)
+                    "SELECT content_hash, payload FROM records WHERE record_id = ?", (record_id,)
                 ).fetchone()
                 if existing is None:
                     connection.execute(
@@ -222,7 +223,7 @@ class Database:
                     connection.execute(
                         """INSERT INTO record_revisions (record_id, content_hash, payload, observed_at)
                            VALUES (?, ?, ?, ?)""",
-                        (record_id, existing["content_hash"], payload, now),
+                        (record_id, existing["content_hash"], existing["payload"], now),
                     )
                     connection.execute(
                         """UPDATE records
@@ -408,7 +409,7 @@ class Database:
 
     def stats(self) -> dict[str, Any]:
         return {
-            "database_path": str(self.path),
+            "database_path": display_path(self.path),
             "total_records": self.total_records(),
             "records_by_type": self.count_by_type(),
             "entity_mappings": self.count_mappings(),

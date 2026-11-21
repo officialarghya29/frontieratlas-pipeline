@@ -31,6 +31,11 @@ Only include a non-null value when the source text explicitly supports it. Other
 ALLOWED_PRICING = {"FREE", "FREEMIUM", "PAID", "ENTERPRISE", "UNKNOWN"}
 
 
+def _has_evidence(evidence: dict, field: str) -> bool:
+    value = evidence.get(field)
+    return isinstance(value, str) and bool(value.strip())
+
+
 async def main_async(limit: int, record_type: str) -> int:
     settings = get_settings()
     db = Database(settings.database_path).connect()
@@ -67,12 +72,26 @@ async def main_async(limit: int, record_type: str) -> int:
                         report["failures"] += 1
                         continue
                     record = result.record
+                    changed = False
                     pricing = record.get("pricingModel")
-                    if isinstance(pricing, str) and pricing.upper() in ALLOWED_PRICING:
+                    if (
+                        isinstance(pricing, str)
+                        and pricing.upper() in ALLOWED_PRICING
+                        and _has_evidence(result.evidence, "pricingModel")
+                    ):
                         product["content"]["pricingModel"] = pricing.upper()
+                        changed = True
                     category = record.get("category")
-                    if isinstance(category, str) and category.strip():
+                    if (
+                        isinstance(category, str)
+                        and category.strip()
+                        and _has_evidence(result.evidence, "category")
+                    ):
                         product["content"]["category"] = category.strip()[:200]
+                        changed = True
+                    if not changed:
+                        report["failures"] += 1
+                        continue
                     try:
                         validated = validate_record(product)
                     except Exception:  # noqa: BLE001 - do not persist invalid output

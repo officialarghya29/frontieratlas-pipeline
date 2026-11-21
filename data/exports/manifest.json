@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-21T07:43:16Z",
-  "database": "/home/arghya/Projects/ai signal project/data/frontieratlas.db",
+  "generated_at": "2026-11-21T08:13:06Z",
+  "database": "data/frontieratlas.db",
   "tabs": {
     "STARTUP": {
       "tab_name": "Startups",
@@ -145,12 +145,12 @@
       "sha256": "4ab5f10e52f90376c654646d62bfaedb0e90c21508d790119544e88a2cee5139"
     },
     "products.csv": {
-      "bytes": 1545066,
-      "sha256": "0d509ff4a2d48bf0b5481782a6b5e017944d9551af3e22f87440256b6ebe941e"
+      "bytes": 1545034,
+      "sha256": "c85987559587e1b1a10fcb28a3e8681794e5759372919f493400487c432c792b"
     },
     "products.jsonl": {
-      "bytes": 2176990,
-      "sha256": "6de6b7cb6e2cad09a5653cdb04b13de0ffe4556f52b02e3a952f930640a5df56"
+      "bytes": 2176966,
+      "sha256": "0831275a2cace4a41d735f56d49d2ecf85a0695663d32ccbd8477d0e533e8ee0"
     },
     "research_papers.csv": {
       "bytes": 2360381,
@@ -177,12 +177,12 @@
       "sha256": "ff97a29c1b2520edcd1bb77089afbc12c7ff7cfb2f673f9034c38a68ba7ce2ee"
     },
     "entity_mapping_log.csv": {
-      "bytes": 577767,
-      "sha256": "96e8e0702f9d23c41ee62d8789cd42adb7434896645340a35335b1e4a1409916"
+      "bytes": 577967,
+      "sha256": "9067dfe9bba1beadd10261c0f4d2d080fa5db0738f7751e0ac4e1f1c020c3d5c"
     },
     "entity_mapping_log.jsonl": {
-      "bytes": 999816,
-      "sha256": "a82259441a4454683014950d58ac386c01c9c88d3c346791da2d72a856de53cf"
+      "bytes": 1000016,
+      "sha256": "6344a7b3ab1486538869e163eb67998176335fe30b38cf810647a2c39a4afc28"
     }
   },
   "total_records": 5928,

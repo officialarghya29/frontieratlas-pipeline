@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T07:43:17Z",
+  "generated_at": "2026-11-21T08:13:06Z",
   "run": {
     "run_id": "final-20261121",
     "started_at": "2026-11-21T07:25:42Z",
@@ -1754,9 +1754,9 @@
         "missing_pct": 0.0
       },
       "content.startupName": {
-        "present": 10,
-        "missing": 2480,
-        "missing_pct": 99.6
+        "present": 6,
+        "missing": 2484,
+        "missing_pct": 99.76
       },
       "content.pricingModel": {
         "present": 2490,
@@ -1943,8 +1943,8 @@
   "entity_resolution": {
     "decisions": {
       "NO_MATCH": 2413,
-      "REVIEW_REQUIRED": 67,
-      "AUTO_MATCHED": 10
+      "REVIEW_REQUIRED": 71,
+      "AUTO_MATCHED": 6
     },
     "methods": {
       "not_name_like": 1918,
@@ -1952,8 +1952,8 @@
       "alias_match": 4,
       "domain_match": 6
     },
-    "manual_review_required": 67,
-    "auto_matched": 10
+    "manual_review_required": 71,
+    "auto_matched": 6
   },
   "llm_extraction": {
     "status": "pending",
@@ -1975,7 +1975,7 @@
     "source": "pytest --junitxml data/processed/junit.xml"
   },
   "database": {
-    "database_path": "/home/arghya/Projects/ai signal project/data/frontieratlas.db",
+    "database_path": "data/frontieratlas.db",
     "total_records": 5928,
     "records_by_type": {
       "JOB": 214,
@@ -1985,6 +1985,6 @@
       "STARTUP": 1894
     },
     "entity_mappings": 2490,
-    "size_bytes": 15044608
+    "size_bytes": 15077376
   }
 }

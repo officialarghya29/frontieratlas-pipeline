@@ -39,6 +39,17 @@ def load_yaml(path: Path) -> dict[str, Any]:
     return _expand_env(data)
 
 
+def display_path(path: Path, *, base: Path | None = None) -> str:
+    """Return a portable path for exported metadata, never a machine-local absolute path."""
+
+    resolved = Path(path).resolve()
+    root = (base or PROJECT_ROOT).resolve()
+    try:
+        return str(resolved.relative_to(root))
+    except ValueError:
+        return resolved.name
+
+
 @dataclass(frozen=True)
 class HttpSettings:
     timeout_seconds: float = 30.0

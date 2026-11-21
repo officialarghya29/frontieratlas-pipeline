@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frontieratlas"
+version = "1.0.0"
+description = "FrontierAtlas AI ecosystem ingestion, enrichment and export pipeline"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Arghya Bose", email = "officialarghya29@gmail.com" },
+]
+dynamic = ["dependencies"]
+
+[project.urls]
+Repository = "https://github.com/officialarghya29/frontieratlas-pipeline"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["frontieratlas*"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}

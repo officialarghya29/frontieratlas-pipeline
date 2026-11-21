@@ -17,7 +17,7 @@ Do **not** submit the XLSX link as the Google Sheet URL. The XLSX is the upload 
 
 ### Short version
 
-> A reproducible async Python pipeline that collected 1,894 genuine AI startups, 2,490 AI products, 1,314 arXiv papers, 214 publication-verified AI/tech jobs and 16 fresh AI news articles, with GitHub star enrichment, auditable entity resolution (2,490 logged decisions), SQLite persistence, six-tab exports, 53 passing tests and a three-page architecture document. The Google Sheet is published from the supplied six-tab workbook; LLM orchestration is implemented with Gemini→Groq→DeepSeek fallback and remains pending only because no provider key was supplied.
+> A reproducible async Python pipeline that collected 1,894 genuine AI startups, 2,490 AI products, 1,314 arXiv papers, 214 publication-verified AI/tech jobs and 16 fresh AI news articles, with GitHub star enrichment, auditable entity resolution (2,490 logged decisions), SQLite persistence, six-tab exports, 53 passing tests and a three-page architecture document. The Google Sheet deliverable is the supplied six-tab workbook, ready to publish publicly; LLM orchestration is implemented with Gemini→Groq→DeepSeek fallback and remains pending only because no provider key was supplied.
 
 ### Full version, numbered
 
@@ -28,7 +28,7 @@ Do **not** submit the XLSX link as the Google Sheet URL. The XLSX is the upload 
 5. **Research paper records:** 1,314 unique arXiv papers across cs.AI, cs.LG, cs.CL, cs.CV and cs.RO.
 6. **Job records:** 214 with timezone-aware publication timestamps inside the strict 24-hour window (Himalayas 43, Arbeitnow 107, Jobicy 64).
 7. **News records:** 16 inside the 24-hour window (TechCrunch 5, The Verge 4, WIRED 4, Ars Technica 1, MIT Technology Review 2).
-8. **Entity mapping records:** 2,490 (10 auto-matched, 67 flagged for manual review, 2,413 no-match).
+8. **Entity mapping records:** 2,490 (6 auto-matched, 71 flagged for manual review, 2,413 no-match).
 9. **Data sources:** YC-OSS AI JSON, arXiv API, Product Hunt Atom feed, Hacker News Show HN via Algolia, Hugging Face Spaces API, five RSS feeds (TechCrunch AI, The Verge AI, WIRED AI, Ars Technica, MIT Technology Review), five job-board APIs (Himalayas, Remotive, Remote OK, Arbeitnow, Jobicy), and the GitHub REST API for stars. Papers with Code was disabled because the service was archived; AI Dev Jobs was excluded after it returned zero live listings.
 10. **LLM providers implemented:** Gemini Flash → Groq Llama → DeepSeek, with structured JSON extraction, semantic chunking, 413 splitting, 429 Retry-After/backoff, provider fallback and circuit breaking. No provider key was supplied, so extraction is marked pending and no field was guessed.
 11. **Database:** SQLite in WAL mode with PostgreSQL-compatible DDL, stable text primary keys, unique constraints, idempotent upserts, revision audit, checkpoints and source-run metadata. PostgreSQL plus queued distributed workers is documented as the 500k-scale migration path, not claimed as implemented.
@@ -43,6 +43,7 @@ git clone https://github.com/officialarghya29/frontieratlas-pipeline.git
 cd frontieratlas-pipeline
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e . --no-deps
 cp .env.example .env
 
 python scripts/collect_all.py
@@ -113,11 +114,11 @@ The extractor accepts only evidence-backed values that pass schema validation; e
 python scripts/verify_submission.py
 ```
 
-Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, workbook tabs, PDF page count, test results, commit identity, AI attribution, repository secret scan, and writes `data/exports/submission_summary.json`. Missing Google/LLM credentials are reported as external actions, not hidden.
+Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, manifest file hashes and row counts, workbook headers and row counts, PDF page count, test results, every commit's author/committer identity, AI attribution across all commit messages, repository secret scan, and writes `data/exports/submission_summary.json`. Missing Google/LLM credentials are reported as external actions, not hidden.
 
 ## F. Security and identity
 
 - The repository commit is authored **Arghya Bose <officialarghya29@gmail.com>**, with no AI co-author and no AI attribution footer.
 - No GitHub token, Google key, API key, `.env`, database or raw response is committed. `.env`, credentials, `data/raw/`, and the SQLite database are git-ignored.
 - The GitHub token used during the build was never written to any file; revoke it at the end of the day as planned.
-- The Sheet must be publicly viewable only after confirming it contains no private data; the included workbook contains dataset rows and source URLs only.
+- The Sheet must be publicly viewable only after confirming it contains no private data; the included workbook contains dataset rows, source URLs and entity-matching notes only.

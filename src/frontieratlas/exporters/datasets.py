@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
-from ..common.config import AppSettings
+from ..common.config import AppSettings, display_path
 from ..common.ids import iso_now
 from ..common.text import remove_control_chars
 from ..storage.db import Database
@@ -194,7 +194,7 @@ def export_datasets(settings: AppSettings, db: Database) -> dict:
     settings.export_dir.mkdir(parents=True, exist_ok=True)
     manifest: dict[str, Any] = {
         "generated_at": iso_now(),
-        "database": str(settings.database_path),
+        "database": display_path(db.path),
         "tabs": {},
         "files": {},
     }

@@ -1,6 +1,6 @@
 # FrontierAtlas Data Quality Report
 
-Generated: 2026-11-21T07:43:17Z
+Generated: 2026-11-21T08:13:06Z
 Collection run: final-20261121 (completed)
 
 ## Dataset counts
@@ -73,7 +73,7 @@ Collection run: final-20261121 (completed)
 | Field | Present | Missing | Missing % |
 | --- | ---: | ---: | ---: |
 | content.entityName | 2,490 | 0 | 0.0% |
-| content.startupName | 10 | 2,480 | 99.6% |
+| content.startupName | 6 | 2,484 | 99.76% |
 | content.pricingModel | 2,490 | 0 | 0.0% |
 | content.productUrl | 2,490 | 0 | 0.0% |
 | content.description | 1,244 | 1,246 | 50.04% |
@@ -135,9 +135,9 @@ Policy: published within 24h, clock skew 5m.
 
 ## Entity resolution
 
-- Decisions: {"NO_MATCH": 2413, "REVIEW_REQUIRED": 67, "AUTO_MATCHED": 10}
+- Decisions: {"NO_MATCH": 2413, "REVIEW_REQUIRED": 71, "AUTO_MATCHED": 6}
 - Methods: {"not_name_like": 1918, "fuzzy_token_set": 562, "alias_match": 4, "domain_match": 6}
-- Manual review required: 67
+- Manual review required: 71
 
 ## LLM extraction
 

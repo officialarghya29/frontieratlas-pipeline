@@ -41,6 +41,7 @@ def _resolver(tmp_path):
         ]
     )
     db.add_alias("Acme AI", "Acme Corporation", "yc_ai")
+    db.add_alias("Acme AI", "Ace", "yc_ai")
     settings = get_settings()
     return db, EntityResolver(settings.entity_resolution, db)
 
@@ -59,6 +60,11 @@ def test_alias_match(tmp_path):
     mapping = resolver.resolve("Acme Corporation", "https://unrelated.example")
     assert mapping.method == "alias_match"
     assert mapping.decision == "AUTO_MATCHED"
+
+    single_token = resolver.resolve("Ace", "https://unrelated.example")
+    assert single_token.method == "alias_match"
+    assert single_token.decision == "REVIEW_REQUIRED"
+    assert single_token.review_required is True
 
 
 def test_domain_match_is_verified_evidence(tmp_path):

@@ -14,10 +14,11 @@
 ### Files created
 
 - `src/frontieratlas/` — collectors, common utilities, extractors, resolvers, enrichers, storage, exporters, quality, schemas.
-- `scripts/` — `collect_all.py`, `enrich_github.py`, `resolve_entities.py`, `extract_llm.py`, `export_all.py`, `export_sheets.py`, `validate_all.py`, `benchmark.py`, `build_architecture_pdf.py`.
+- `scripts/` — `collect_all.py`, `enrich_github.py`, `resolve_entities.py`, `extract_llm.py`, `export_all.py`, `export_sheets.py`, `validate_all.py`, `verify_submission.py`, `benchmark.py`, `build_submission_workbook.py`, `build_architecture_pdf.py`.
 - `config/` — `settings.yaml`, `sources.yaml`, `seed_entities.txt`.
 - `tests/unit/` — 9 test modules.
-- `data/exports/` — six CSVs, six JSONL files, manifest, quality report.
+- `data/exports/` — six CSVs, six JSONL files, manifest, quality report, six-tab XLSX workbook.
+- `SUBMISSION.md`, `pyproject.toml` — publishing packet and installable package metadata.
 
 ### Tests executed
 
@@ -51,7 +52,7 @@ pytest --junitxml=data/processed/junit.xml -q
 - News: all five feeds live; 16 records within 24h; full-text extraction where freely available, otherwise labelled `SUMMARY_ONLY`.
 - Jobs: Himalayas 43, Arbeitnow 107, Jobicy 64; Remotive 0 (naive timestamps), Remote OK 0 (stale at run time).
 - GitHub: 170 explicit repositories; 164 star counts verified; 4 missing; 2 renamed/no-match. Nulls preserved.
-- Entity resolution: 10 auto, 67 review, 2,413 no-match.
+- Entity resolution: 6 auto (all domain), 71 review, 2,413 no-match; single-token aliases are review-only.
 - LLM: pending — no provider credentials supplied; no field guessed.
 - Google Sheets: blocked — no service-account credentials; CSV/JSONL complete; no public URL claimed.
 

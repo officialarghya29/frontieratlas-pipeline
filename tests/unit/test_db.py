@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import json
 from datetime import datetime, timezone
 
+from frontieratlas.common.text import content_hash
 from frontieratlas.schemas import EntityMapping
 from frontieratlas.storage.db import Database
 
@@ -32,6 +34,11 @@ def test_upsert_tracks_revision_without_duplicate_row(tmp_path):
         assert db.total_records() == 1
         rows = db.connection.execute("SELECT COUNT(*) AS c FROM record_revisions").fetchone()
         assert rows["c"] == 1
+        revision = db.connection.execute(
+            "SELECT content_hash, payload FROM record_revisions"
+        ).fetchone()
+        assert revision["content_hash"] == content_hash(_record("first"))
+        assert json.loads(revision["payload"])["content"]["description"] == "first"
         assert db.fetch_records("STARTUP")[0]["content"]["description"] == "second"
 
 

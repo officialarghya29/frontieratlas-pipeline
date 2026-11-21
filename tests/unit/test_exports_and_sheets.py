@@ -49,6 +49,7 @@ def test_csv_and_jsonl_exports(tmp_path):
     settings = replace(get_settings(), export_dir=tmp_path / "exports")
     manifest = export_datasets(settings, db)
     assert manifest["tabs"]["STARTUP"]["rows"] == 1
+    assert manifest["database"] == "test.db"
     csv_text = (tmp_path / "exports" / "startups.csv").read_text(encoding="utf-8")
     assert csv_text.splitlines()[0].startswith("schemaVersion,recordType,record_id")
     jsonl_lines = (tmp_path / "exports" / "startups.jsonl").read_text(encoding="utf-8").splitlines()

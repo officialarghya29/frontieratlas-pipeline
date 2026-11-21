@@ -179,7 +179,7 @@ def build() -> None:
             "Job and news publication times must be timezone-aware and inside the 24-hour window; future timestamps beyond a five-minute skew are rejected, and crawl time is never substituted. "
             "Records with missing or ambiguous publication dates are excluded and logged by reason. GitHub repositories are accepted only when the paper text explicitly contains the repository URL, "
             "and star counts come from the GitHub REST API at a recorded UTC check time. A product is never assumed to be a startup's product: associations require exact name, alias, "
-            "non-shared domain equality, or a high-confidence fuzzy match, and 67 ambiguous candidates are explicitly flagged for manual review.",
+            "non-shared domain equality, or a high-confidence fuzzy match, and 71 ambiguous candidates are explicitly flagged for manual review.",
             body,
         ),
         Paragraph("Measured result at the time of writing", h2),
@@ -191,7 +191,7 @@ def build() -> None:
                 ["Research papers", "1,314", "Unique arXiv ids across cs.AI/LG/CL/CV/RO"],
                 ["Jobs", "214", "Strict 24h verified: Himalayas 43, Arbeitnow 107, Jobicy 64"],
                 ["News", "16", "All five RSS feeds; 24h verified"],
-                ["Entity mapping log", "2,490", "10 auto-matched, 67 review, 2,413 no-match"],
+                ["Entity mapping log", "2,490", "6 auto-matched, 71 review, 2,413 no-match"],
                 ["Tests", "53 passing", "pytest, mocked HTTP, no live network"],
             ],
             [4.2 * cm, 3.0 * cm, 10.4 * cm],

@@ -63,7 +63,27 @@ SHARED_HOSTS = {
     "replit.com",
     "codepen.io",
     "observablehq.com",
+    "github.io",
+    "gitlab.io",
+    "webflow.io",
+    "wixsite.com",
+    "squarespace.com",
+    "wordpress.com",
+    "blogspot.com",
+    "gitbook.io",
+    "readme.io",
+    "onrender.com",
+    "fly.dev",
+    "railway.app",
+    "render.com",
+    "glitch.me",
+    "surge.sh",
 }
+
+# A one-word alias (for example "BOOM" or "Trellis") collides with too many
+# unrelated product titles. Multi-word aliases may auto-match; single-token
+# aliases are deliberately review-only.
+MIN_AUTO_ALIAS_TOKENS = 2
 SHARED_SUFFIXES = (
     ".hf.space",
     ".gradio.live",
@@ -219,12 +239,20 @@ class EntityResolver:
 
         alias = self._startup_by_alias.get(key)
         if alias:
+            if len(normalized.split()) >= MIN_AUTO_ALIAS_TOKENS:
+                return mapping(
+                    alias.canonical_name,
+                    "alias_match",
+                    self.settings.alias_threshold,
+                    "AUTO_MATCHED",
+                    f"alias of {alias.canonical_name}",
+                )
             return mapping(
                 alias.canonical_name,
                 "alias_match",
                 self.settings.alias_threshold,
-                "AUTO_MATCHED",
-                f"alias of {alias.canonical_name}",
+                "REVIEW_REQUIRED",
+                f"single-token alias of {alias.canonical_name} is ambiguous; manual review needed",
             )
 
         domain = domain_of(source_url)

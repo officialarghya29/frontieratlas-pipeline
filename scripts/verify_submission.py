@@ -9,6 +9,7 @@ never silently treated as complete.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
@@ -29,7 +30,7 @@ from frontieratlas.schemas import EntityMapping, validate_record  # noqa: E402
 from frontieratlas.storage.db import Database  # noqa: E402
 
 TABS = ["Startups", "Products", "Research Papers", "Jobs", "News", "Entity Mapping Log"]
-TEXT_SUFFIXES = {".py", ".md", ".yaml", ".yml", ".txt", ".csv", ".json", ".jsonl", ".ini", ".example", ".gitignore"}
+TEXT_SUFFIXES = {".py", ".md", ".yaml", ".yml", ".txt", ".csv", ".json", ".jsonl", ".ini", ".toml", ".example", ".gitignore"}
 MAX_SCAN_BYTES = 6 * 1024 * 1024
 EXPECTED_AUTHOR_EMAIL = "officialarghya29@gmail.com"
 
@@ -52,6 +53,7 @@ def main() -> int:
         "architecture.pdf",
         "SUBMISSION.md",
         "requirements.txt",
+        "pyproject.toml",
         ".env.example",
         "IMPLEMENTATION_PLAN.md",
         "PROGRESS.md",
@@ -107,11 +109,79 @@ def main() -> int:
     findings = scan_payloads(payloads)
     check("export secret scan", not findings, f"findings={findings}")
 
+    manifest_path = ROOT / "data" / "exports" / "manifest.json"
+    manifest_ok = False
+    manifest_detail = "missing"
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            expected_rows = {
+                "STARTUP": len(payloads["Startups"]["rows"]),
+                "PRODUCT": len(payloads["Products"]["rows"]),
+                "RESEARCH_PAPER": len(payloads["Research Papers"]["rows"]),
+                "JOB": len(payloads["Jobs"]["rows"]),
+                "NEWS": len(payloads["News"]["rows"]),
+                "ENTITY_MAPPING": len(payloads["Entity Mapping Log"]["rows"]),
+            }
+            problems: list[str] = []
+            manifest_tabs = manifest.get("tabs") or {}
+            for record_type, count in expected_rows.items():
+                actual = (manifest_tabs.get(record_type) or {}).get("rows", -1)
+                if actual != count:
+                    problems.append(f"{record_type} rows {actual}/{count}")
+            expected_total = sum(count for key, count in expected_rows.items() if key != "ENTITY_MAPPING")
+            if manifest.get("total_records") != expected_total:
+                problems.append(f"total {manifest.get('total_records')}/{expected_total}")
+            if manifest.get("entity_mappings") != expected_rows["ENTITY_MAPPING"]:
+                problems.append("entity mapping total")
+            database = str(manifest.get("database") or "")
+            if not database or Path(database).is_absolute():
+                problems.append(f"non-portable database path: {database!r}")
+            files = manifest.get("files") or {}
+            for filename, meta in files.items():
+                path = settings.export_dir / filename
+                if not path.is_file():
+                    problems.append(f"missing {filename}")
+                elif hashlib.sha256(path.read_bytes()).hexdigest() != meta.get("sha256"):
+                    problems.append(f"hash {filename}")
+            manifest_ok = not problems
+            manifest_detail = (
+                f"{len(files)} file hashes verified; database={database}"
+                if manifest_ok
+                else "; ".join(problems[:4])
+            )
+        except Exception as exc:  # noqa: BLE001 - malformed manifest is a failed check
+            manifest_detail = f"invalid manifest: {type(exc).__name__}: {exc}"
+    check("export manifest", manifest_ok, manifest_detail)
+
     workbook_path = ROOT / "data" / "exports" / "FrontierAtlas_submission.xlsx"
-    workbook_tabs: list[str] = []
+    workbook_ok = False
+    workbook_detail = "missing"
     if workbook_path.exists():
-        workbook_tabs = load_workbook(workbook_path, read_only=True).sheetnames
-    check("workbook tabs", workbook_tabs == TABS, f"tabs={workbook_tabs}")
+        workbook = load_workbook(workbook_path, read_only=True)
+        try:
+            problems = []
+            if workbook.sheetnames != TABS:
+                problems.append(f"tabs={workbook.sheetnames}")
+            for tab in TABS:
+                if tab not in workbook.sheetnames:
+                    continue
+                sheet = workbook[tab]
+                expected = payloads.get(tab, {"headers": [], "rows": []})
+                header_row = next(sheet.iter_rows(min_row=1, max_row=1, values_only=True), ())
+                if list(header_row) != expected["headers"]:
+                    problems.append(f"{tab}: headers")
+                if sheet.max_row - 1 != len(expected["rows"]):
+                    problems.append(f"{tab}: rows {sheet.max_row - 1}/{len(expected['rows'])}")
+                if sheet.max_column != len(expected["headers"]):
+                    problems.append(f"{tab}: cols {sheet.max_column}/{len(expected['headers'])}")
+            workbook_ok = not problems
+            workbook_detail = (
+                "six tabs, headers and row counts match" if workbook_ok else "; ".join(problems[:4])
+            )
+        finally:
+            workbook.close()
+    check("workbook contents", workbook_ok, workbook_detail)
 
     pdf_pages = 0
     pdf_path = ROOT / "architecture.pdf"
@@ -124,13 +194,28 @@ def main() -> int:
     tests_ok = test_results.get("failed", 1) == 0 and test_results.get("errors", 1) == 0 and test_results.get("passed", 0) > 0
     check("automated tests", tests_ok, f"{test_results}")
 
-    author_name = git("log", "-1", "--format=%an")
-    author_email = git("log", "-1", "--format=%ae")
-    commit_body = git("log", "-1", "--format=%B")
-    identity_ok = author_email.lower() == EXPECTED_AUTHOR_EMAIL and author_name == "Arghya Bose"
-    check("commit identity", identity_ok, f"{author_name} <{author_email}>")
-    attribution = any(marker in commit_body for marker in ("Co-Authored-By", "Codebuff", "Generated with"))
-    check("no AI attribution", not attribution, "commit message clean")
+    identities: list[list[str]] = []
+    for line in git("log", "--format=%an%x1f%ae%x1f%cn%x1f%ce").splitlines():
+        parts = line.split("\x1f")
+        if len(parts) == 4:
+            identities.append(parts)
+    identity_ok = bool(identities) and all(
+        author_name == "Arghya Bose"
+        and author_email.lower() == EXPECTED_AUTHOR_EMAIL
+        and committer_name == "Arghya Bose"
+        and committer_email.lower() == EXPECTED_AUTHOR_EMAIL
+        for author_name, author_email, committer_name, committer_email in identities
+    )
+    check(
+        "commit identity",
+        identity_ok,
+        f"all commits under Arghya Bose <{EXPECTED_AUTHOR_EMAIL}>",
+    )
+    commit_bodies = git("log", "--format=%B").lower()
+    attribution = any(
+        marker in commit_bodies for marker in ("co-authored-by", "codebuff", "generated with", "🤖")
+    )
+    check("no AI attribution", not attribution, "all commit messages clean")
 
     secret_hits: list[str] = []
     tracked = git("ls-files", "-z").split("\0")
