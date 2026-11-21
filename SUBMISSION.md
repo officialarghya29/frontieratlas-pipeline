@@ -66,6 +66,8 @@ The repo contains a styled six-tab workbook: `data/exports/FrontierAtlas_submiss
 
 `https://github.com/officialarghya29/frontieratlas-pipeline/blob/main/data/exports/FrontierAtlas_submission.xlsx`
 
+The easier handoff is the dedicated [`data/google_sheets/`](data/google_sheets/) folder: it contains the same workbook as `FrontierAtlas_Google_Sheets_Upload.xlsx`, six numbered CSVs for manual tab imports, and [`00_START_HERE.md`](data/google_sheets/00_START_HERE.md). Use that folder if you want to build the tabs yourself.
+
 The credential-free Sheets dry run validated all six tabs and **8,418 data rows** with **zero secret findings**. Only Google account authorization is missing.
 
 > **Replacement warning:** use this newly regenerated workbook. If you already uploaded an older copy, delete it or overwrite it and use the new URL. The corrected file has **6 auto-matched, 71 review-required and 2,413 no-match** mapping decisions; do not leave an older upload public.

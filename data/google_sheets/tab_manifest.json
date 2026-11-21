@@ -1,0 +1,145 @@
+{
+  "generated_at": "2026-11-21T09:31:02Z",
+  "workbook": "FrontierAtlas_Google_Sheets_Upload.xlsx",
+  "total_data_rows": 8418,
+  "tabs": [
+    {
+      "tab": "Startups",
+      "file": "01_Startups.csv",
+      "source": "data/exports/startups.csv",
+      "rows": 1894,
+      "columns": 14,
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "entityName",
+        "employeeCount",
+        "website",
+        "description",
+        "foundedYear",
+        "industry",
+        "headquarters",
+        "recordUrl",
+        "collectedAt"
+      ]
+    },
+    {
+      "tab": "Products",
+      "file": "02_Products.csv",
+      "source": "data/exports/products.csv",
+      "rows": 2490,
+      "columns": 13,
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "entityName",
+        "startupName",
+        "pricingModel",
+        "productUrl",
+        "description",
+        "category",
+        "recordUrl",
+        "collectedAt"
+      ]
+    },
+    {
+      "tab": "Research Papers",
+      "file": "03_Research_Papers.csv",
+      "source": "data/exports/research_papers.csv",
+      "rows": 1314,
+      "columns": 16,
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "title",
+        "authors",
+        "paper_url",
+        "github_url",
+        "github_stars",
+        "github_checked_at",
+        "published_date",
+        "abstract",
+        "recordUrl",
+        "githubEvidenceUrl",
+        "collectedAt"
+      ]
+    },
+    {
+      "tab": "Jobs",
+      "file": "04_Jobs.csv",
+      "source": "data/exports/jobs.csv",
+      "rows": 214,
+      "columns": 15,
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "company",
+        "date",
+        "is_remote",
+        "role_family",
+        "title",
+        "job_url",
+        "recordUrl",
+        "dateEvidence",
+        "freshness_verified",
+        "collectedAt"
+      ]
+    },
+    {
+      "tab": "News",
+      "file": "05_News.csv",
+      "source": "data/exports/news.csv",
+      "rows": 16,
+      "columns": 16,
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "title",
+        "date",
+        "publisher",
+        "full_text",
+        "summary",
+        "article_url",
+        "recordUrl",
+        "dateEvidence",
+        "freshness_verified",
+        "extraction_status",
+        "collectedAt"
+      ]
+    },
+    {
+      "tab": "Entity Mapping Log",
+      "file": "06_Entity_Mapping_Log.csv",
+      "source": "data/exports/entity_mapping_log.csv",
+      "rows": 2490,
+      "columns": 10,
+      "headers": [
+        "raw_name",
+        "canonical_name",
+        "entity_type",
+        "source_url",
+        "method",
+        "similarity_score",
+        "decision",
+        "review_required",
+        "mapped_at",
+        "notes"
+      ]
+    }
+  ]
+}
