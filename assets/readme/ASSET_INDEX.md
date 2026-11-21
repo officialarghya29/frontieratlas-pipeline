@@ -12,7 +12,7 @@ Every visual in this folder is generated from the committed FrontierAtlas run. T
 | `05_targets_vs_actual.png` | Assignment targets compared with actual output | `targets` |
 | `06_startup_industry_mix.png` | YC AI startup industry distribution | `startups.csv` |
 | `07_pipeline_architecture.png` | Implemented pipeline boundaries | repository modules |
-| `08_sheet_handoff_map.png` | Six tabs and row counts for the Sheet handoff | `data_quality_report.json` |
+| `08_workbook_map.png` | Six tabs and reconciliation totals for the workbook | `data_quality_report.json` |
 | `09_workbook_startups_preview.png` | Readable crop of the actual Startups tab | `FrontierAtlas_submission.xlsx` |
 | `09_workbook_full_page.png` | Full first-page workbook render | `FrontierAtlas_submission.xlsx` |
 | `10_architecture_page_preview.png` | Rendered page 1 of the architecture PDF | `architecture.pdf` |
@@ -26,7 +26,7 @@ python scripts/build_readme_assets.py
 
 The chart set needs `matplotlib` and `Pillow`. The two screenshot renders also need `libreoffice` and `pdftoppm`; if either is missing, the script still rebuilds the charts and skips the screenshots.
 
-The workbook and CSV handoff copies are rebuilt separately:
+The workbook and per-tab CSV copies are rebuilt separately:
 
 ```bash
 python scripts/build_sheet_imports.py

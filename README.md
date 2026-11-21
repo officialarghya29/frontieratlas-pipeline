@@ -6,9 +6,9 @@
 
 **A verifiable map of one day in the AI economy.**
 
-Built by **Arghya Bose** · 21 November 2026 · [Repository](https://github.com/officialarghya29/frontieratlas-pipeline) · [Architecture PDF](architecture.pdf) · [Submission packet](SUBMISSION.md)
+Built by **Arghya Bose** · 21 November 2026 · [Repository](https://github.com/officialarghya29/frontieratlas-pipeline) · [Architecture PDF](architecture.pdf)
 
-> I built FrontierAtlas to answer one question: how much of the AI ecosystem can you collect from public sources without inventing the missing pieces? The final run returned **5,928 records** across five artifact types, plus **2,490 explicit product-to-startup decisions**. Every chart below is generated from the committed exports, not a slide deck.
+> FrontierAtlas measures how much of the AI economy can be collected from public sources without inventing missing pieces. The final run returned **5,928 records** across five artifact types and **2,490 explicit product-to-startup decisions**. Every chart below is generated from the committed exports.
 
 ## At a glance
 
@@ -19,17 +19,15 @@ Built by **Arghya Bose** · 21 November 2026 · [Repository](https://github.com/
 | Research papers | **1,314** | Unique arXiv papers across cs.AI, cs.LG, cs.CL, cs.CV and cs.RO |
 | Jobs | **214** | Listings with timezone-aware publication timestamps inside a strict 24-hour window |
 | News | **16** | AI articles inside the same 24-hour window |
-| Entity mapping log | **2,490** | Every product-to-startup decision, including the ones I refused to make |
+| Entity mapping log | **2,490** | Every product-to-startup decision, including candidates deliberately left unmatched |
 
-**5,928 canonical records** · **15 enabled sources** · **29.55-second collection run** · **53 passing tests** · **15/15 preflight checks**
+**5,928 canonical records** · **15 enabled sources** · **29.55-second collection run** · **53 passing tests** · **15/15 verification checks**
 
 <p align="center">
   <img src="assets/readme/01_dataset_at_a_glance.png" alt="Bar chart of 1,894 startups, 2,490 products, 1,314 papers, 214 jobs and 16 news records" width="100%">
 </p>
 
-The Google Sheet is not published yet. I do not have Google credentials on this machine, so I did the next best thing: I made the handoff impossible to confuse. Everything you need is in [`data/google_sheets/`](data/google_sheets/), with one XLSX and six numbered CSVs. The details are in [The Sheet handoff](#the-sheet-handoff). If you just want the files to send, open `submit files/00_READ_ME_FIRST.md`.
-
-## The run
+## Collection run
 
 The collection started at `2026-11-21T07:25:42Z` and finished at `2026-11-21T07:26:11Z`: **29.55 seconds** for the live run. The longer part was not fetching. It was deciding what deserved to survive.
 
@@ -43,7 +41,7 @@ Every source is treated as a candidate generator, not as truth.
 | Duplicate handling | Stable IDs and source-level dedupe prevent the same record from inflating the count |
 | Provenance | Every record keeps a source URL and a record URL |
 
-This is why the pipeline can say **zero fabricated records** without sounding mysterious. The rules are visible, and the failures are logged.
+This is why the pipeline can claim **zero fabricated records**: the rules are visible, and the failures are logged.
 
 > **Field note 01 — a feed is a candidate generator, not a dataset.**
 >
@@ -55,7 +53,7 @@ This is why the pipeline can say **zero fabricated records** without sounding my
   <img src="assets/readme/02_source_yield_comparison.png" alt="Source yield chart: accepted divided by discovered for 15 sources" width="100%">
 </p>
 
-A source's yield is a property of the source, not a measure of how hard the collector worked. YC's AI JSON is clean and nearly complete. arXiv returns duplicate versions of the same paper. News feeds age out quickly. Remotive's timestamps have no timezone, so I could not verify them against a 24-hour cutoff; Remote OK's listings were already older than the cutoff.
+A source's yield is a property of the source, not a measure of how hard the collector worked. YC's AI JSON is clean and nearly complete. arXiv returns duplicate versions of the same paper. News feeds age out quickly. Remotive's timestamps have no timezone, so they were not verifiable against a 24-hour cutoff; Remote OK's listings were already older than the cutoff.
 
 | Source | Type | Discovered | Accepted | Yield | What happened |
 | --- | --- | ---: | ---: | ---: | --- |
@@ -76,9 +74,9 @@ A source's yield is a property of the source, not a measure of how hard the coll
 | Remote OK | Jobs | 99 | **0** | 0.0% | All listings older than 24 hours |
 | **All sources** | — | **10,347** | **5,928** | **57.3%** | Accepted canonical records |
 
-The two zeroes are deliberate. I did not relax the freshness rule to make a source look productive.
+The two zeroes are deliberate: the freshness rule was not relaxed to make a source look productive.
 
-## What the sample looks like
+## Dataset composition
 
 <p align="center">
   <img src="assets/readme/06_startup_industry_mix.png" alt="YC AI startup industry mix, led by B2B at 1,257 companies" width="100%">
@@ -98,7 +96,7 @@ The YC slice is overwhelmingly B2B: **1,257 of 1,894 companies (66.4%)**. Health
 
 ### Products are launches, not companies
 
-The products are intentionally source-shaped. They are not a commercial product database, and I did not pretend otherwise.
+The products are intentionally source-shaped. They are a launch dataset, not a commercial product database.
 
 | Product source | Records | Share of products |
 | --- | ---: | ---: |
@@ -107,17 +105,17 @@ The products are intentionally source-shaped. They are not a commercial product 
 | Product Hunt | 19 | 0.8% |
 | **Total** | **2,490** | **100%** |
 
-Only **6 products** have a confident startup association. Pricing is `UNKNOWN` for all 2,490 because the source text did not explicitly support a pricing model; I did not infer one from a landing page or a launch tag. Half the product records have no description, and 19.8% have no category. Those gaps are visible in the quality report, not hidden by a fill step.
+Only **6 products** have a confident startup association. Pricing is `UNKNOWN` for all 2,490 because the source text did not explicitly support a pricing model; no pricing was inferred from a landing page or a launch tag. Half the product records have no description, and 19.8% have no category. Those gaps are visible in the quality report, not hidden by a fill step.
 
 ### Papers and code evidence
 
-The arXiv set contains **1,314 papers**. Only **170** include an explicit repository URL in the paper text. I verified **164** of those repositories; the other six were missing, deleted, or did not match the requested name. Median stars are `0`, the maximum is `38,630`, and the rest remain `null` rather than guessed.
+The arXiv set contains **1,314 papers**. Only **170** include an explicit repository URL in the paper text. **164** repositories were verified; the other six were missing, deleted, or did not match the requested name. Median stars are `0`, the maximum is `38,630`, and the rest remain `null` rather than guessed.
 
 > **Field note 02 — names are soft keys; domains are hard keys.**
 >
 > Product titles are written for humans: “Browser”, “Studio”, “Omni Video Factory”, “TRELLIS”. Company names are written for the company. The gap between those two languages is where entity resolution gets dangerous.
 
-## The hardest part: names
+## Entity resolution
 
 <p align="center">
   <img src="assets/readme/03_entity_resolution_split.png" alt="Entity resolution split: 6 auto-matched, 71 review-required, 2,413 no-match" width="100%">
@@ -131,15 +129,15 @@ The final resolver made **2,490 decisions**:
 | `REVIEW_REQUIRED` | **71** | 4 single-token alias candidates and 67 fuzzy candidates; no association written |
 | `NO_MATCH` | **2,413** | 1,918 descriptive titles skipped fuzzy matching; 495 fell below the review threshold |
 
-The first version of this resolver was too eager. It auto-merged a few single-token aliases such as **BOOM**, **TRELLIS**, **Ava**, and a Japanese title that normalized to `AI`. Each one looked plausible in isolation and wrong in context. I tightened the rule: single-token aliases are now review-only, shared hosting domains never count as ownership evidence, and fuzzy candidates need both a high token score and a comparable character ratio before they can auto-merge.
+The first resolver version was too eager. It auto-merged a few single-token aliases such as **BOOM**, **TRELLIS**, **Ava**, and a Japanese title that normalized to `AI`. Each one looked plausible in isolation and wrong in context. The rule was tightened: single-token aliases are now review-only, shared hosting domains never count as ownership evidence, and fuzzy candidates need both a high token score and a comparable character ratio before they can auto-merge.
 
 That changed the result from “confident but noisy” to **6 high-confidence associations and 71 visible questions**.
 
-I would rather show you the 71 questions than hide them under a join that looks clever.
+The 71 review candidates remain visible rather than being forced into a low-confidence association.
 
 ### The decision log
 
-| Decision | Why I made it | Effect |
+| Decision | Rationale | Effect |
 | --- | --- | --- |
 | Domain equality can auto-merge | A non-shared website domain is stronger evidence than a similar title | 6 auto-matches |
 | Single-token aliases stay in review | `BOOM` and `TRELLIS` collide with unrelated products | 4 alias candidates held back |
@@ -168,7 +166,7 @@ Freshness is the easiest rule to fake and one of the easiest to verify. The pipe
 
 > **Field note 03 — freshness is a decay curve, not a badge.**
 >
-> A feed can be technically live and still be useless. The 24-hour window is a promise about the data, and the rejected items are part of the evidence. If I submit this on a later date, I should rerun collection; the committed snapshot is dated **2026-11-21**.
+> A feed can be technically live and still be useless. The 24-hour window is a promise about the data, and the rejected items are part of the evidence. The committed snapshot is dated **2026-11-21**; a later run should recollect rather than reuse it.
 
 ## Quality is the audit trail
 
@@ -176,7 +174,7 @@ Freshness is the easiest rule to fake and one of the easiest to verify. The pipe
   <img src="assets/readme/05_targets_vs_actual.png" alt="Targets versus actual: 1,894 startups, 2,490 products and 1,314 papers against a 1,000 target each" width="100%">
 </p>
 
-The assignment asked for at least 1,000 startups, 1,000 products and 1,000 papers. The final run cleared all three without changing the thresholds after the fact.
+The collection target was at least 1,000 startups, 1,000 products and 1,000 papers. The final run cleared all three without changing the thresholds after the fact.
 
 | Target | Required | Actual | Result |
 | --- | ---: | ---: | --- |
@@ -188,7 +186,7 @@ The assignment asked for at least 1,000 startups, 1,000 products and 1,000 paper
 | --- | --- |
 | Schema issues | **0** |
 | Automated tests | **53 passed, 0 failed, 0 errors** |
-| Preflight checks | **13 / 13 passed** |
+| Verification checks | **15 / 15 passed** |
 | Manifest hashes | **12 verified** |
 | Workbook | **6 tabs / 8,418 data rows** |
 | Architecture PDF | **3 pages** |
@@ -197,11 +195,11 @@ The assignment asked for at least 1,000 startups, 1,000 products and 1,000 paper
 | Cross-source duplicates removed | **0** |
 | SQLite size | **15,077,376 bytes** |
 
-### What is missing — and why
+### Missing data
 
-Missing fields are not embarrassing if they are measured. This is the actual missing-field table from the run.
+Missing fields are measured, not hidden. This is the actual missing-field table from the run.
 
-| Field | Missing | Missing % | My decision |
+| Field | Missing | Missing % | Decision |
 | --- | ---: | ---: | --- |
 | Product description | 1,246 / 2,490 | 50.04% | Leave null; do not generate copy |
 | Product category | 494 / 2,490 | 19.84% | Leave null; source did not provide one |
@@ -213,7 +211,7 @@ Missing fields are not embarrassing if they are measured. This is the actual mis
 
 > **Field note 04 — missing data is a finding, not a prompt to improvise.**
 >
-> A dataset becomes less trustworthy when every cell is filled. I left pricing at `UNKNOWN`, descriptions null, star counts null and startup associations absent where the evidence did not support them. That is why the quality report and the mapping log are part of the deliverable.
+> A dataset becomes less trustworthy when every cell is filled. Pricing remains `UNKNOWN`, descriptions and star counts remain null, and startup associations are absent where the evidence does not support them. That is why the quality report and the mapping log are part of the deliverable.
 
 ### Implemented versus proposed
 
@@ -223,24 +221,20 @@ Missing fields are not embarrassing if they are measured. This is the actual mis
 | Canonical schemas, idempotent storage, revision audit | **Implemented** |
 | Entity resolution with auditable mapping log | **Implemented — 2,490 decisions** |
 | GitHub star enrichment with explicit evidence only | **Implemented — 164 repositories verified** |
-| LLM orchestration with Gemini → Groq → DeepSeek fallback | **Implemented and unit-tested; extraction pending a provider key** |
-| Six-tab Google Sheets export and public-sharing guard | **Implemented and dry-run validated; no Sheet URL published** |
+| LLM orchestration with Gemini → Groq → DeepSeek fallback | **Implemented and unit-tested; live extraction requires a provider key** |
+| Six-tab Google Sheets export and public-sharing guard | **Implemented and dry-run validated** |
 | PostgreSQL cluster, durable queue, distributed workers, 500k validation | **Proposed migration path — not claimed as built** |
 | Manual-review UI and graph/vector projections | **Proposed** |
 
-## The Sheet handoff
+## Workbook and exports
 
 <p align="center">
-  <img src="assets/readme/08_sheet_handoff_map.png" alt="One workbook, six tabs and 8,418 data rows for the Google Sheets handoff" width="100%">
+  <img src="assets/readme/08_workbook_map.png" alt="Six-tab workbook with 8,418 data rows" width="100%">
 </p>
 
-I did not put a fake Sheet URL in this repository. What I did instead is make the handoff explicit and boring:
+The six tabs mirror the canonical export tables. A single XLSX collects the full dataset for review, while the per-tab CSV copies preserve the same rows for programmatic use.
 
-- **One XLSX** for the fastest path: `data/google_sheets/FrontierAtlas_Google_Sheets_Upload.xlsx`
-- **Six numbered CSVs** if you prefer to build the tabs yourself
-- **One start-here guide**: [`data/google_sheets/00_START_HERE.md`](data/google_sheets/00_START_HERE.md)
-
-| Handoff file | Tab | Rows |
+| Workbook file | Tab | Rows |
 | --- | --- | ---: |
 | `FrontierAtlas_Google_Sheets_Upload.xlsx` | all six tabs | 8,418 |
 | `01_Startups.csv` | Startups | 1,894 |
@@ -250,31 +244,21 @@ I did not put a fake Sheet URL in this repository. What I did instead is make th
 | `05_News.csv` | News | 16 |
 | `06_Entity_Mapping_Log.csv` | Entity Mapping Log | 2,490 |
 
-### If you only do one thing
-
-1. Download `data/google_sheets/FrontierAtlas_Google_Sheets_Upload.xlsx`.
-2. Upload it to Google Drive and open it with Google Sheets.
-3. Rename it **FrontierAtlas — AI Ecosystem Dataset**.
-4. Share it as **Anyone with the link → Viewer**.
-5. Open the copied link in an incognito window and confirm all six tabs load.
-
-**Replace any earlier upload.** The corrected workbook has **6 auto-matched / 71 review-required / 2,413 no-match** decisions. Do not leave an older copy public.
-
-The full workbook is 2.5 MB and 8,418 data rows. If you want to inspect the first rows without opening Excel, the crop below is from the actual Startups tab.
+The workbook is 2.5 MB and 8,418 data rows. The crop below is from the Startups tab.
 
 <p align="center">
-  <img src="assets/readme/09_workbook_startups_preview.png" alt="Actual Startups tab from the corrected workbook" width="100%">
+  <img src="assets/readme/09_workbook_startups_preview.png" alt="Actual Startups tab from the six-tab workbook" width="100%">
   <br>
   <em>Actual workbook crop — the full page is available at <a href="assets/readme/09_workbook_full_page.png">09_workbook_full_page.png</a>.</em>
 </p>
 
-The formal architecture artifact is the three-page [architecture.pdf](architecture.pdf). Page 1 is rendered below; the PDF is the version to submit.
+The architecture is documented in the three-page [architecture.pdf](architecture.pdf). Page 1 is rendered below.
 
 <p align="center">
   <img src="assets/readme/10_architecture_page_preview.png" alt="First page of the FrontierAtlas architecture PDF" width="62%">
 </p>
 
-## Reproduce it
+## Reproduction
 
 ```bash
 git clone https://github.com/officialarghya29/frontieratlas-pipeline.git
@@ -302,23 +286,20 @@ The optional visual rebuild is separate:
 pip install -r requirements-dev.txt
 python scripts/build_readme_assets.py
 python scripts/build_sheet_imports.py
-python scripts/build_submit_folder.py
 ```
 
 The chart generator reads `data/exports/*.csv` and `data_quality_report.json`; the workbook and architecture previews use `libreoffice` and `pdftoppm` if they are installed. The full asset index is in [`assets/readme/ASSET_INDEX.md`](assets/readme/ASSET_INDEX.md).
 
-### The folder map
+### Repository layout
 
 | Path | What belongs there |
 | --- | --- |
 | `assets/readme/` | Every README visual, with numbered names and an asset index |
 | `data/exports/` | Canonical CSV/JSONL exports, manifest, quality report and workbook |
-| `data/google_sheets/` | One XLSX, six numbered CSVs and the start-here guide |
-| `submit files/` | The submission-only bundle: start-here guide, PDF, XLSX and packet |
+| `data/google_sheets/` | Six-tab workbook and per-tab CSV copies |
 | `src/frontieratlas/` | Collectors, schemas, storage, resolvers, enrichers, exporters |
-| `scripts/` | Collection, resolution, export, workbook, PDF, preflight and asset builders |
+| `scripts/` | Collection, resolution, export, workbook, PDF, verification and asset builders |
 | `tests/unit/` | 53 mocked-HTTP tests |
-| `SUBMISSION.md` | Copy-paste submission packet and the exact Sheet steps |
 
 ## Five small theories from this run
 
@@ -328,7 +309,7 @@ The chart generator reads `data/exports/*.csv` and `data_quality_report.json`; t
 4. **Dedupe early is cheaper than dedupe often.** Source-level duplicate removal kept the database clean before export; the final cross-source duplicate count was zero.
 5. **Missing data is information.** Half the products have no description and almost none have a confident startup association. Those gaps are the honest shape of the sources.
 
-## What I would build next
+## Roadmap
 
 - A small review screen for the 71 entity candidates, with the source URL, candidate domain and evidence note beside each decision.
 - A production PostgreSQL path with a durable queue and source-partitioned workers, validated at 500k records rather than claimed.
@@ -339,7 +320,7 @@ The chart generator reads `data/exports/*.csv` and `data_quality_report.json`; t
 
 The data belongs to its publishers: Y Combinator (via the YC-OSS mirror), arXiv, Product Hunt, Hacker News (Algolia), Hugging Face, TechCrunch, The Verge, WIRED, Ars Technica, MIT Technology Review, Himalayas, Remotive, Remote OK, Arbeitnow, Jobicy and GitHub. Every record keeps its source URL and provenance URL. The source terms and date semantics live in [`config/sources.yaml`](config/sources.yaml).
 
-The repository is authored and maintained by **Arghya Bose** (`officialarghya29@gmail.com`). The submission packet is in [`SUBMISSION.md`](SUBMISSION.md).
+The repository is authored and maintained by **Arghya Bose** (`officialarghya29@gmail.com`).
 
 <p align="center">
   <sub>FrontierAtlas / AR1 / built to be checked.</sub>

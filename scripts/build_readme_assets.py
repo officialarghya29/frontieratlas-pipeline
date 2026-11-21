@@ -646,11 +646,11 @@ def pipeline() -> None:
 
 
 # --------------------------------------------------------------------------- #
-# 08 — sheet handoff map
+# 08 — workbook map
 # --------------------------------------------------------------------------- #
 
 
-def sheet_map() -> None:
+def workbook_map() -> None:
     report = _quality()
     counts = report["counts"]["by_type"]
     cards = [
@@ -667,8 +667,8 @@ def sheet_map() -> None:
     ax.set_ylim(0, 100)
     ax.axis("off")
     ax.text(0, 93, "ONE WORKBOOK  /  SIX TABS  /  8,418 DATA ROWS", color=CYAN, fontsize=8.0, weight="bold")
-    ax.text(0, 85, "The handoff is deliberately boring.", color=TEXT, fontsize=19, weight="bold")
-    ax.text(0, 78, "Upload one XLSX, or import the numbered CSVs into a blank sheet. Same data, two paths.", color=MUTED, fontsize=9.0)
+    ax.text(0, 85, "Every record has a place.", color=TEXT, fontsize=19, weight="bold")
+    ax.text(0, 78, "Six tabs, one row per canonical record, all counts read from the committed quality report.", color=MUTED, fontsize=9.0)
     for index, (number, name, count, color) in enumerate(cards):
         col = index % 3
         row = index // 3
@@ -689,8 +689,8 @@ def sheet_map() -> None:
         ax.text(x + 1.6, y + 13.3, name, color=TEXT, fontsize=9.2, weight="bold")
         ax.text(x + 1.6, y + 7.4, f"{count:,}", color=color, fontsize=18, weight="bold")
         ax.text(x + 1.6, y + 3.3, "rows", color=FAINT, fontsize=7)
-    ax.text(0, 2, "Use data/google_sheets/00_START_HERE.md for the exact import and sharing steps.", color=FAINT, fontsize=7.2)
-    _save(fig, "08_sheet_handoff_map.png")
+    ax.text(0, 2, "Source: data_quality_report.json  ·  rows reconcile with data/exports/*.csv.", color=FAINT, fontsize=7.2)
+    _save(fig, "08_workbook_map.png")
 
 
 # --------------------------------------------------------------------------- #
@@ -755,7 +755,7 @@ def main() -> int:
     targets()
     industry_mix()
     pipeline()
-    sheet_map()
+    workbook_map()
     screenshots()
     print(f"README assets written to {OUT}")
     return 0
