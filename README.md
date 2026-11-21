@@ -213,7 +213,7 @@ python scripts/benchmark.py
 python scripts/build_architecture_pdf.py
 ```
 
-Validation output at run time: **0 schema issues**, all three count targets met.
+Validation output at run time: **0 schema issues**, all three count targets met. Latest preflight snapshot: [`submission_summary.json`](data/exports/submission_summary.json) — **13 checks, 0 failures**. Freshness is verified against the committed **2026-11-21** collection run; rerun collection and preflight if submitting later.
 
 Data quality report: [`data/exports/data_quality_report.md`](data/exports/data_quality_report.md) and `.json`. It contains per-source discovered/accepted/rejected counts, rejection reasons, missing-field percentages, freshness verification, GitHub enrichment results, LLM success/failure status, API failures, duplicate counts and collection timestamps.
 
@@ -239,12 +239,15 @@ Required Google setup: create a service account, enable the **Google Sheets API*
 
 ### Fastest path (no Google Cloud setup)
 
-`data/exports/FrontierAtlas_submission.xlsx` is a styled, six-tab workbook ready for upload:
+`data/exports/FrontierAtlas_submission.xlsx` is a styled, six-tab workbook ready for upload. The credential-free dry run validated six tabs, 8,418 data rows and zero secret findings:
 
 1. Upload it to Google Drive.
 2. Right-click → **Open with** → **Google Sheets** (save as a Google Sheet if prompted).
 3. **Share** → **General access** → **Anyone with the link** → **Viewer**.
 4. Paste the Sheet URL into the submission form.
+5. Open the copied URL in an incognito window and confirm it opens without sign-in, shows all six tabs, and the Entity Mapping Log has 2,490 rows.
+
+> **Replace any earlier upload.** The corrected workbook has 6 auto-matched, 71 review-required and 2,413 no-match decisions. Delete or overwrite an older Sheet and use the new URL.
 
 Verify the six tab names and these row counts: Startups 1,894; Products 2,490; Research Papers 1,314; Jobs 214; News 16; Entity Mapping Log 2,490.
 
@@ -258,7 +261,7 @@ python scripts/export_sheets.py            # creates, populates, publishes, prin
 python scripts/export_sheets.py --dry-run  # validate payloads without credentials
 ```
 
-**Current status:** the API export is **blocked** because `GOOGLE_APPLICATION_CREDENTIALS` is not set on this machine, so no Sheet URL is claimed here. The staging workbook and all CSV/JSONL exports are complete and committed.
+**Current status:** the API export is **blocked** because `GOOGLE_APPLICATION_CREDENTIALS` is not set on this machine, so no Sheet URL is claimed here. A credential-free dry run confirmed six tabs, 8,418 data rows and zero secret findings. The staging workbook and all CSV/JSONL exports are complete and committed.
 
 ## Data integrity rules enforced
 

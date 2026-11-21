@@ -1,28 +1,30 @@
 # Submission Packet — FrontierAtlas / GraphOne AI Engineer Assessment
 
-Everything in this repository is built, collected, validated and committed. Two items need your account: **publishing the Google Sheet** and, optionally, **running LLM extraction with your own API key**. Both take minutes and are spelled out below.
+The repository is built, collected, validated, preflight-clean and pushed under **Arghya Bose**. Three account-gated steps remain: **publish the corrected workbook as a public Google Sheet**, optionally **run LLM extraction with your own provider key**, and **submit the form**. The public Sheet URL is the only value that must never be guessed, left as a placeholder, or replaced with a GitHub/XLSX link.
 
 ## A. Final links to submit
 
 | Field | Value |
 | --- | --- |
 | GitHub repository | `https://github.com/officialarghya29/frontieratlas-pipeline` |
-| Public Google Sheet | `<PASTE THE PUBLIC SHEET URL AFTER SECTION C>` |
+| Public Google Sheet | **PENDING — replace after section C; do not submit this literal text** |
 | Architecture PDF | `https://github.com/officialarghya29/frontieratlas-pipeline/blob/main/architecture.pdf` |
 | Submission form | `https://forms.gle/3JJhukomumTFueRW7` |
 
 Do **not** submit the XLSX link as the Google Sheet URL. The XLSX is the upload source; the Sheet URL must be the `docs.google.com/spreadsheets/...` link after step C.
 
+**A packet that still says PENDING is not final.** Replace both placeholders with the same public Sheet URL after step C. The corrected workbook is `data/exports/FrontierAtlas_submission.xlsx` (6 auto-matched, 71 review-required, 2,413 no-match). Any earlier upload made from an older workbook must be deleted or replaced; do not leave the old mapping counts public.
+
 ## B. Copy-paste answers
 
 ### Short version
 
-> A reproducible async Python pipeline that collected 1,894 genuine AI startups, 2,490 AI products, 1,314 arXiv papers, 214 publication-verified AI/tech jobs and 16 fresh AI news articles, with GitHub star enrichment, auditable entity resolution (2,490 logged decisions), SQLite persistence, six-tab exports, 53 passing tests and a three-page architecture document. The Google Sheet deliverable is the supplied six-tab workbook, ready to publish publicly; LLM orchestration is implemented with Gemini→Groq→DeepSeek fallback and remains pending only because no provider key was supplied.
+> A reproducible async Python pipeline that collected 1,894 genuine AI startups, 2,490 AI products, 1,314 arXiv papers, 214 publication-verified AI/tech jobs and 16 fresh AI news articles, with GitHub star enrichment, auditable entity resolution (2,490 logged decisions), SQLite persistence, six-tab exports, 53 passing tests and a three-page architecture document. The corrected six-tab workbook is ready to upload; the public Sheet URL is pending because no Google credentials were supplied. LLM orchestration is implemented with Gemini→Groq→DeepSeek fallback and remains pending only because no provider key was supplied.
 
 ### Full version, numbered
 
 1. **GitHub repository:** https://github.com/officialarghya29/frontieratlas-pipeline
-2. **Public Google Sheet:** `<PASTE AFTER SECTION C>`
+2. **Public Google Sheet:** **PENDING — replace after section C**
 3. **Startup records:** 1,894 unique (1,906 YC AI companies discovered, 12 duplicates removed).
 4. **Product records:** 2,490 unique (1,977 Show HN launches, 494 Hugging Face Spaces, 19 Product Hunt launches).
 5. **Research paper records:** 1,314 unique arXiv papers across cs.AI, cs.LG, cs.CL, cs.CV and cs.RO.
@@ -64,6 +66,10 @@ The repo contains a styled six-tab workbook: `data/exports/FrontierAtlas_submiss
 
 `https://github.com/officialarghya29/frontieratlas-pipeline/blob/main/data/exports/FrontierAtlas_submission.xlsx`
 
+The credential-free Sheets dry run validated all six tabs and **8,418 data rows** with **zero secret findings**. Only Google account authorization is missing.
+
+> **Replacement warning:** use this newly regenerated workbook. If you already uploaded an older copy, delete it or overwrite it and use the new URL. The corrected file has **6 auto-matched, 71 review-required and 2,413 no-match** mapping decisions; do not leave an older upload public.
+
 1. Download that file.
 2. Go to `https://drive.google.com` → **New** → **File upload** → select the XLSX.
 3. Right-click the uploaded file → **Open with** → **Google Sheets**. If prompted, choose **Save as Google Sheets**.
@@ -75,8 +81,9 @@ The repo contains a styled six-tab workbook: `data/exports/FrontierAtlas_submiss
    - Research Papers: 1,314
    - Jobs: 214
    - News: 16
-   - Entity Mapping Log: 2,490
+   - Entity Mapping Log: 2,490 (6 auto-matched, 71 review-required, 2,413 no-match)
 7. Paste the `https://docs.google.com/spreadsheets/d/...` link into the submission form and into item 2 above.
+8. Open the copied link in an incognito window. Confirm it opens without sign-in, shows all six tabs, and the Entity Mapping Log still has 2,490 rows.
 
 ### Automatic API path (optional, if you prefer a service account)
 
@@ -94,7 +101,7 @@ The script creates the spreadsheet, writes all six tabs, freezes headers, adds f
 
 ## D. Optional LLM extraction (only if you have a provider key)
 
-No LLM key was supplied, so extraction is currently `pending` and no field was fabricated. To run it under your key:
+No LLM key was supplied, so extraction is currently `pending` and no field was fabricated. A no-key run was also executed: it wrote `data/processed/llm_extraction.json` with status `pending`, `0` attempted, `0` updated, and left every record unchanged. To run it under your key:
 
 ```bash
 # Free Gemini key: https://aistudio.google.com/apikey
@@ -114,7 +121,9 @@ The extractor accepts only evidence-backed values that pass schema validation; e
 python scripts/verify_submission.py
 ```
 
-Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, manifest file hashes and row counts, workbook headers and row counts, PDF page count, test results, every commit's author/committer identity, AI attribution across all commit messages, repository secret scan, and writes `data/exports/submission_summary.json`. Missing Google/LLM credentials are reported as external actions, not hidden.
+Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, manifest file hashes and row counts, workbook headers and row counts, PDF page count, test results, every commit's author/committer identity, AI attribution across all commit messages, repository secret scan, and writes [`data/exports/submission_summary.json`](data/exports/submission_summary.json). The latest snapshot has **13 checks and 0 failures**. Missing Google/LLM credentials are reported as external actions, not hidden.
+
+Freshness note: the 24-hour checks apply to the committed collection run dated **2026-11-21**. If you submit on a later date, rerun collection and preflight; do not present this snapshot as live 24-hour data.
 
 ## F. Security and identity
 
