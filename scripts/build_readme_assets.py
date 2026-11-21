@@ -203,7 +203,7 @@ def hero() -> None:
     ax.text(
         0.055,
         0.505,
-        "A mapped day of the AI economy — public sources,\nreal provenance, conservative joins.",
+        "A mapped day of the AI economy —\npublic sources, real provenance,\nconservative joins.",
         color=MUTED,
         fontsize=10.5,
         linespacing=1.55,

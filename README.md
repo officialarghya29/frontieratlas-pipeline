@@ -43,6 +43,10 @@ Every source is treated as a candidate generator, not as truth.
 
 This is why the pipeline can claim **zero fabricated records**: the rules are visible, and the failures are logged.
 
+<p align="center">
+  <img src="assets/readme/07_pipeline_architecture.png" alt="Implemented pipeline from public sources through collection, normalization, storage, enrichment, resolution and export" width="100%">
+</p>
+
 > **Field note 01 — a feed is a candidate generator, not a dataset.**
 >
 > The 15 source counters show **10,347 raw candidates** against **5,928 accepted records**. The difference is not a bug; it is the work. Some candidates were stale, some were duplicates, some had no usable URL, and some simply were not about AI. The accepted set is smaller and more useful because the gates are explicit.
