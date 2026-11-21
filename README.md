@@ -21,13 +21,13 @@ Built by **Arghya Bose** · 21 November 2026 · [Repository](https://github.com/
 | News | **16** | AI articles inside the same 24-hour window |
 | Entity mapping log | **2,490** | Every product-to-startup decision, including the ones I refused to make |
 
-**5,928 canonical records** · **15 enabled sources** · **29.55-second collection run** · **53 passing tests** · **14/14 preflight checks**
+**5,928 canonical records** · **15 enabled sources** · **29.55-second collection run** · **53 passing tests** · **15/15 preflight checks**
 
 <p align="center">
   <img src="assets/readme/01_dataset_at_a_glance.png" alt="Bar chart of 1,894 startups, 2,490 products, 1,314 papers, 214 jobs and 16 news records" width="100%">
 </p>
 
-The Google Sheet is not published yet. I do not have Google credentials on this machine, so I did the next best thing: I made the handoff impossible to confuse. Everything you need is in [`data/google_sheets/`](data/google_sheets/), with one XLSX and six numbered CSVs. The details are in [The Sheet handoff](#the-sheet-handoff).
+The Google Sheet is not published yet. I do not have Google credentials on this machine, so I did the next best thing: I made the handoff impossible to confuse. Everything you need is in [`data/google_sheets/`](data/google_sheets/), with one XLSX and six numbered CSVs. The details are in [The Sheet handoff](#the-sheet-handoff). If you just want the files to send, open `submit files/00_READ_ME_FIRST.md`.
 
 ## The run
 
@@ -302,6 +302,7 @@ The optional visual rebuild is separate:
 pip install -r requirements-dev.txt
 python scripts/build_readme_assets.py
 python scripts/build_sheet_imports.py
+python scripts/build_submit_folder.py
 ```
 
 The chart generator reads `data/exports/*.csv` and `data_quality_report.json`; the workbook and architecture previews use `libreoffice` and `pdftoppm` if they are installed. The full asset index is in [`assets/readme/ASSET_INDEX.md`](assets/readme/ASSET_INDEX.md).
@@ -313,6 +314,7 @@ The chart generator reads `data/exports/*.csv` and `data_quality_report.json`; t
 | `assets/readme/` | Every README visual, with numbered names and an asset index |
 | `data/exports/` | Canonical CSV/JSONL exports, manifest, quality report and workbook |
 | `data/google_sheets/` | One XLSX, six numbered CSVs and the start-here guide |
+| `submit files/` | The submission-only bundle: start-here guide, PDF, XLSX and packet |
 | `src/frontieratlas/` | Collectors, schemas, storage, resolvers, enrichers, exporters |
 | `scripts/` | Collection, resolution, export, workbook, PDF, preflight and asset builders |
 | `tests/unit/` | 53 mocked-HTTP tests |

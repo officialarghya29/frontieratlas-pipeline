@@ -237,6 +237,42 @@ def main() -> int:
             handoff_detail = f"invalid handoff: {type(exc).__name__}: {exc}"
     check("Google Sheets handoff", handoff_ok, handoff_detail)
 
+    submit_dir = ROOT / "submit files"
+    submit_ok = False
+    submit_detail = "missing"
+    if submit_dir.is_dir():
+        try:
+            problems: list[str] = []
+            required_submit = (
+                "00_READ_ME_FIRST.md",
+                "01_ARCHITECTURE.pdf",
+                "02_GOOGLE_SHEETS_UPLOAD.xlsx",
+                "03_SUBMISSION_PACKET.md",
+            )
+            for filename in required_submit:
+                if not (submit_dir / filename).is_file():
+                    problems.append(f"missing {filename}")
+            pairs = [
+                ("01_ARCHITECTURE.pdf", ROOT / "architecture.pdf"),
+                ("02_GOOGLE_SHEETS_UPLOAD.xlsx", workbook_path),
+                ("03_SUBMISSION_PACKET.md", ROOT / "SUBMISSION.md"),
+            ]
+            for filename, canonical in pairs:
+                copy = submit_dir / filename
+                if not copy.is_file() or not canonical.is_file():
+                    continue
+                if hashlib.sha256(copy.read_bytes()).hexdigest() != hashlib.sha256(canonical.read_bytes()).hexdigest():
+                    problems.append(f"stale {filename}")
+            submit_ok = not problems
+            submit_detail = (
+                "four files present; PDF/XLSX/packet hashes verified"
+                if submit_ok
+                else "; ".join(problems[:4])
+            )
+        except Exception as exc:  # noqa: BLE001 - malformed bundle is a failed check
+            submit_detail = f"invalid submit folder: {type(exc).__name__}: {exc}"
+    check("submit folder", submit_ok, submit_detail)
+
     pdf_pages = 0
     pdf_path = ROOT / "architecture.pdf"
     if pdf_path.exists():

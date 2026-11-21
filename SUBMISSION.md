@@ -1,6 +1,6 @@
 # Submission Packet — FrontierAtlas / GraphOne AI Engineer Assessment
 
-The repository is built, collected, validated, preflight-clean and pushed under **Arghya Bose**. Three account-gated steps remain: **publish the corrected workbook as a public Google Sheet**, optionally **run LLM extraction with your own provider key**, and **submit the form**. The public Sheet URL is the only value that must never be guessed, left as a placeholder, or replaced with a GitHub/XLSX link.
+The repository is built, collected, validated, preflight-clean and pushed under **Arghya Bose**. Three account-gated steps remain: **publish the corrected workbook as a public Google Sheet**, optionally **run LLM extraction with your own provider key**, and **submit the form**. The public Sheet URL is the only value that must never be guessed, left as a placeholder, or replaced with a GitHub/XLSX link. For the shortest path, open `submit files/00_READ_ME_FIRST.md`.
 
 ## A. Final links to submit
 
@@ -66,7 +66,7 @@ The repo contains a styled six-tab workbook: `data/exports/FrontierAtlas_submiss
 
 `https://github.com/officialarghya29/frontieratlas-pipeline/blob/main/data/exports/FrontierAtlas_submission.xlsx`
 
-The easier handoff is the dedicated [`data/google_sheets/`](data/google_sheets/) folder: it contains the same workbook as `FrontierAtlas_Google_Sheets_Upload.xlsx`, six numbered CSVs for manual tab imports, and [`00_START_HERE.md`](data/google_sheets/00_START_HERE.md). Use that folder if you want to build the tabs yourself.
+The easier handoff is the dedicated [`data/google_sheets/`](https://github.com/officialarghya29/frontieratlas-pipeline/tree/main/data/google_sheets) folder: it contains the same workbook as `FrontierAtlas_Google_Sheets_Upload.xlsx`, six numbered CSVs for manual tab imports, and [`00_START_HERE.md`](https://github.com/officialarghya29/frontieratlas-pipeline/blob/main/data/google_sheets/00_START_HERE.md). Use that folder if you want to build the tabs yourself. The flat submission bundle is `submit files/00_READ_ME_FIRST.md`.
 
 The credential-free Sheets dry run validated all six tabs and **8,418 data rows** with **zero secret findings**. Only Google account authorization is missing.
 
@@ -123,7 +123,7 @@ The extractor accepts only evidence-backed values that pass schema validation; e
 python scripts/verify_submission.py
 ```
 
-Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, manifest file hashes and row counts, workbook headers and row counts, the Google Sheets handoff folder and workbook copy, PDF page count, test results, every commit's author/committer identity, AI attribution across all commit messages, repository secret scan, and writes [`data/exports/submission_summary.json`](data/exports/submission_summary.json). The latest snapshot has **14 checks and 0 failures**. Missing Google/LLM credentials are reported as external actions, not hidden.
+Expected final line: `LOCAL SUBMISSION READY: YES`. It checks required files, record targets, all 5,928 schemas, job/news freshness flags, six tab names, manifest file hashes and row counts, workbook headers and row counts, the Google Sheets handoff folder and workbook copy, the submit-bundle copies, PDF page count, test results, every commit's author/committer identity, AI attribution across all commit messages, repository secret scan, and writes [`data/exports/submission_summary.json`](https://github.com/officialarghya29/frontieratlas-pipeline/blob/main/data/exports/submission_summary.json). The latest snapshot has **15 checks and 0 failures**. Missing Google/LLM credentials are reported as external actions, not hidden.
 
 Freshness note: the 24-hour checks apply to the committed collection run dated **2026-11-21**. If you submit on a later date, rerun collection and preflight; do not present this snapshot as live 24-hour data.
 

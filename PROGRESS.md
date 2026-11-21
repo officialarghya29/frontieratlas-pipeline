@@ -14,12 +14,13 @@
 ### Files created
 
 - `src/frontieratlas/` — collectors, common utilities, extractors, resolvers, enrichers, storage, exporters, quality, schemas.
-- `scripts/` — `collect_all.py`, `enrich_github.py`, `resolve_entities.py`, `extract_llm.py`, `export_all.py`, `export_sheets.py`, `validate_all.py`, `verify_submission.py`, `benchmark.py`, `build_submission_workbook.py`, `build_architecture_pdf.py`, `build_readme_assets.py`, `build_sheet_imports.py`.
+- `scripts/` — `collect_all.py`, `enrich_github.py`, `resolve_entities.py`, `extract_llm.py`, `export_all.py`, `export_sheets.py`, `validate_all.py`, `verify_submission.py`, `benchmark.py`, `build_submission_workbook.py`, `build_architecture_pdf.py`, `build_readme_assets.py`, `build_sheet_imports.py`, `build_submit_folder.py`.
 - `config/` — `settings.yaml`, `sources.yaml`, `seed_entities.txt`.
 - `tests/unit/` — 9 test modules.
 - `data/exports/` — six CSVs, six JSONL files, manifest, quality report, six-tab XLSX workbook.
 - `data/google_sheets/` — one upload-ready XLSX, six numbered CSVs, manifest and start-here guide.
 - `assets/readme/` — verified README charts, screenshots and asset index.
+- `submit files/` — start-here guide, architecture PDF, upload-ready XLSX and submission packet.
 - `SUBMISSION.md`, `pyproject.toml`, `requirements-dev.txt` — publishing packet, package metadata and optional visual tooling.
 
 ### Tests executed

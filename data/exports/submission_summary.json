@@ -72,6 +72,11 @@
       "detail": "six CSVs + workbook verified; 8,418 rows"
     },
     {
+      "check": "submit folder",
+      "ok": true,
+      "detail": "four files present; PDF/XLSX/packet hashes verified"
+    },
+    {
       "check": "architecture PDF",
       "ok": true,
       "detail": "3 page(s)"
