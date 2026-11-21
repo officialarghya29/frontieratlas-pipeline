@@ -1,0 +1,8 @@
+{
+  "passed": 53,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "total": 53,
+  "source": "pytest --junitxml data/processed/junit.xml"
+}

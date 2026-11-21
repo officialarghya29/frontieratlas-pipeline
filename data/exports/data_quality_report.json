@@ -1,0 +1,1990 @@
+{
+  "generated_at": "2026-11-21T07:32:14Z",
+  "run": {
+    "run_id": "final-20261121",
+    "started_at": "2026-11-21T07:25:42Z",
+    "finished_at": "2026-11-21T07:26:11Z",
+    "status": "completed",
+    "duration_seconds": 29.55
+  },
+  "counts": {
+    "by_type": {
+      "JOB": 214,
+      "NEWS": 16,
+      "PRODUCT": 2490,
+      "RESEARCH_PAPER": 1314,
+      "STARTUP": 1894
+    },
+    "total_dataset_records": 5928,
+    "entity_mappings": 2490
+  },
+  "targets": {
+    "STARTUP": {
+      "target": 1000,
+      "actual": 1894,
+      "met": true
+    },
+    "PRODUCT": {
+      "target": 1000,
+      "actual": 2490,
+      "met": true
+    },
+    "RESEARCH_PAPER": {
+      "target": 1000,
+      "actual": 1314,
+      "met": true
+    }
+  },
+  "sources": [
+    {
+      "source": "yc_ai",
+      "record_type": "STARTUP",
+      "source_url": "https://yc-oss.github.io/api/tags/ai.json",
+      "status": "ok",
+      "discovered": 1906,
+      "accepted": 1894,
+      "rejected": 12,
+      "rejections_by_reason": {
+        "duplicate_in_source": 12
+      },
+      "rejection_samples": [
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Lantern",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Laminar",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Freestyle",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Weave",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Candor",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Narrative",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Rivet",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Palisade",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Raven",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Latent",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Lark",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Contour",
+          "source_url": "https://yc-oss.github.io/api/tags/ai.json"
+        }
+      ],
+      "notes": [
+        "1906 AI-tagged YC companies discovered; 1894 accepted."
+      ],
+      "source_meta": {
+        "source_name": "Y Combinator (AI tag, YC-OSS mirror)",
+        "source_url": "https://yc-oss.github.io/api/tags/ai.json",
+        "access_method": "public JSON API",
+        "authentication": "none",
+        "terms_url": "https://github.com/yc-oss/api",
+        "rate_limit": "single static document, fetched once per run",
+        "parser": "yc_json",
+        "date_semantics": "launched_at is a Unix epoch for company launch year; it is not used as a publication date."
+      },
+      "duration_seconds": 1.15,
+      "upsert": {
+        "inserted": 1894,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "producthunt",
+      "record_type": "PRODUCT",
+      "source_url": "https://www.producthunt.com/feed?category=ai-software",
+      "status": "ok",
+      "discovered": 50,
+      "accepted": 19,
+      "rejected": 31,
+      "rejections_by_reason": {
+        "not_ai_related": 31
+      },
+      "rejection_samples": [
+        {
+          "reason": "not_ai_related",
+          "detail": "FFMPA Kids News",
+          "source_url": "https://producthunt.com/products/ffmpa-kids-news"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Salus",
+          "source_url": "https://producthunt.com/products/salus"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Andromon",
+          "source_url": "https://producthunt.com/products/andromon"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Baby's Day In",
+          "source_url": "https://producthunt.com/products/baby-s-day-in"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "ThreadLore",
+          "source_url": "https://producthunt.com/products/threadlore"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "HelpCard",
+          "source_url": "https://producthunt.com/products/helpcard"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Memanto Cloud",
+          "source_url": "https://producthunt.com/products/memanto-by-moorcheh"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Nova by Vybe",
+          "source_url": "https://producthunt.com/products/vybe-4"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Dozy",
+          "source_url": "https://producthunt.com/products/dozy"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Kuc-kuc",
+          "source_url": "https://producthunt.com/products/kuc-kuc"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Scam Link Check",
+          "source_url": "https://producthunt.com/products/scam-link-check"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Saparo",
+          "source_url": "https://producthunt.com/products/saparo"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Compass OS",
+          "source_url": "https://producthunt.com/products/compassos-dev"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "tensorViz",
+          "source_url": "https://producthunt.com/products/tensorviz"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Lumyna Community Challenge",
+          "source_url": "https://producthunt.com/products/lumyna-community-challenge"
+        }
+      ],
+      "notes": [
+        "Product Hunt feed entries=50; accepted=19."
+      ],
+      "source_meta": {
+        "source_name": "Product Hunt (Atom feed)",
+        "source_url": "https://www.producthunt.com/feed?category=ai-software",
+        "access_method": "public Atom feed",
+        "authentication": "none",
+        "terms_url": "https://www.producthunt.com/legal",
+        "rate_limit": "single feed fetch, no documented numeric limit",
+        "parser": "atom_feed",
+        "date_semantics": "published is the Product Hunt launch timestamp with offset; updated is a feed update time and is never used for freshness."
+      },
+      "duration_seconds": 1.2,
+      "upsert": {
+        "inserted": 19,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "showhn",
+      "record_type": "PRODUCT",
+      "source_url": "https://hn.algolia.com/api/v1/search_by_date",
+      "status": "ok",
+      "discovered": 5286,
+      "accepted": 1977,
+      "rejected": 3309,
+      "rejections_by_reason": {
+        "not_ai_related": 435,
+        "duplicate_in_source": 36,
+        "missing_product_url": 29
+      },
+      "rejection_samples": [
+        {
+          "reason": "not_ai_related",
+          "detail": "Pantry an open source scanner that checks what your coding agents run",
+          "source_url": "https://waffuru.ai/products/pantry"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Scots-Codes",
+          "source_url": "https://github.com/vanyakosmos/scots-codes"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "XSquads– Set a mission, agents work on it autonomously in your harness",
+          "source_url": "https://xsquads.ai/"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Trichroma, a Platformer of Light",
+          "source_url": "https://trichroma.namirsab.dev/"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Build a trading bot in 10 seconds",
+          "source_url": "https://board.blink.cash/"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "AIVory Code – One screen for all your coding agents",
+          "source_url": "https://github.com/aivorynet/aivory-code"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "LarpLess, open-source study tracker detecting distractions locally",
+          "source_url": "https://larpless.app/"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Lichess of Schotten Totten",
+          "source_url": "https://schottentotten.com/?src=hn"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Wrangling idle devices matched an H100 on a financial workload",
+          "source_url": "https://murmurcomputing.ai/"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "StripeWorld – a synthetic Stripe API for RL and testing",
+          "source_url": "https://github.com/Kiln-AI/stripe_world"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Hobby MQTT 3.1.1 broker written in Zig",
+          "source_url": "https://github.com/threeaccents/zancudo"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Drive around my village in 3D",
+          "source_url": "https://cherwellvalleymotorclub.app/"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Prediction market competition where only agents can trade",
+          "source_url": "https://vaticin.ai/"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "PlanCity – I find new housing developments across Europe every day",
+          "source_url": "https://plancity.ai/discover/en"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "Sandscale – Cloud infrastructure for AI creators, agents and developers",
+          "source_url": "https://sandscale.dev/"
+        }
+      ],
+      "notes": [
+        "6 Algolia queries; discovered=5286; unique accepted=1977."
+      ],
+      "source_meta": {
+        "source_name": "Hacker News \"Show HN\" (Algolia Search API)",
+        "source_url": "https://hn.algolia.com/api/v1/search_by_date",
+        "access_method": "public JSON API (Algolia HN Search)",
+        "authentication": "none",
+        "terms_url": "https://hn.algolia.com/api",
+        "rate_limit": "unofficial; 0.5s between requests enforced client-side",
+        "parser": "algolia_show_hn",
+        "date_semantics": "created_at is the submission timestamp (UTC); used as launch evidence only, not as a freshness field."
+      },
+      "duration_seconds": 29.13,
+      "upsert": {
+        "inserted": 1977,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "huggingface_spaces",
+      "record_type": "PRODUCT",
+      "source_url": "https://huggingface.co/api/spaces",
+      "status": "ok",
+      "discovered": 800,
+      "accepted": 494,
+      "rejected": 306,
+      "rejections_by_reason": {
+        "missing_description": 306
+      },
+      "rejection_samples": [
+        {
+          "reason": "missing_description",
+          "detail": "JCisHERE/wan2-2-i2v-v3",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "ritianyu/SplatAnything",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "hf-audio/open_asr_leaderboard",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "HuggingFaceSwarms/pybot-msgboard",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "lerobot/visualize_dataset",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "fafsaf1/FlowHMR",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "pollen-robotics/microduck-simulator",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "huggingface/hub-stats",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "traderharikrishna/Wan_2.2_I2V_14B_Custom_Lora",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "MiniMaxAI/MiniMax-Music3",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "lerobot/robot-learning-tutorial",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "hide1/MOSS-Image-Character-Catalog",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "Qwen/Qwen3-TTS",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "nvidia/DVSM",
+          "source_url": "https://huggingface.co/api/spaces"
+        },
+        {
+          "reason": "missing_description",
+          "detail": "ggml-org/gguf-my-repo",
+          "source_url": "https://huggingface.co/api/spaces"
+        }
+      ],
+      "notes": [
+        "HF Spaces pages requested=8; discovered=800; accepted=494."
+      ],
+      "source_meta": {
+        "source_name": "Hugging Face Spaces (public API)",
+        "source_url": "https://huggingface.co/api/spaces",
+        "access_method": "public JSON API",
+        "authentication": "none",
+        "terms_url": "https://huggingface.co/terms-of-service",
+        "rate_limit": "1 request/second enforced client-side",
+        "parser": "hf_spaces_json",
+        "date_semantics": "createdAt/lastModified are platform timestamps, not commercial launch dates."
+      },
+      "duration_seconds": 7.95,
+      "upsert": {
+        "inserted": 494,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "arxiv",
+      "record_type": "RESEARCH_PAPER",
+      "source_url": "https://export.arxiv.org/api/query",
+      "status": "ok",
+      "discovered": 1600,
+      "accepted": 1314,
+      "rejected": 286,
+      "rejections_by_reason": {
+        "duplicate_in_source": 286
+      },
+      "rejection_samples": [
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26617",
+          "source_url": "http://arxiv.org/abs/2611.26617v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26598",
+          "source_url": "http://arxiv.org/abs/2611.26598v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26592",
+          "source_url": "http://arxiv.org/abs/2611.26592v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26590",
+          "source_url": "http://arxiv.org/abs/2611.26590v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26531",
+          "source_url": "http://arxiv.org/abs/2611.26531v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26475",
+          "source_url": "http://arxiv.org/abs/2611.26475v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26407",
+          "source_url": "http://arxiv.org/abs/2611.26407v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26319",
+          "source_url": "http://arxiv.org/abs/2611.26319v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26252",
+          "source_url": "http://arxiv.org/abs/2611.26252v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26248",
+          "source_url": "http://arxiv.org/abs/2611.26248v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26235",
+          "source_url": "http://arxiv.org/abs/2611.26235v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26172",
+          "source_url": "http://arxiv.org/abs/2611.26172v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.26018",
+          "source_url": "http://arxiv.org/abs/2611.26018v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.25989",
+          "source_url": "http://arxiv.org/abs/2611.25989v1"
+        },
+        {
+          "reason": "duplicate_in_source",
+          "detail": "2611.25898",
+          "source_url": "http://arxiv.org/abs/2611.25898v1"
+        }
+      ],
+      "notes": [
+        "arXiv categories=['cs.AI', 'cs.LG', 'cs.CL', 'cs.CV', 'cs.RO']; discovered=1600; unique accepted=1314."
+      ],
+      "source_meta": {
+        "source_name": "arXiv",
+        "source_url": "https://export.arxiv.org/api/query",
+        "access_method": "public Atom API",
+        "authentication": "none",
+        "terms_url": "https://info.arxiv.org/help/api/tou.html",
+        "rate_limit": "3 seconds between requests (arXiv API guidance)",
+        "parser": "arxiv_atom",
+        "date_semantics": "published is the paper submission timestamp from Atom; updated is a revision timestamp and is not used as publication date."
+      },
+      "duration_seconds": 27.11,
+      "upsert": {
+        "inserted": 1314,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "techcrunch_ai",
+      "record_type": "NEWS",
+      "source_url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "status": "ok",
+      "discovered": 20,
+      "accepted": 5,
+      "rejected": 15,
+      "rejections_by_reason": {
+        "stale_publication_timestamp": 15
+      },
+      "rejection_samples": [
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Apple may be developing its own AI agent that runs your Mac: 2026-11-20T00:56:01Z",
+          "source_url": "https://techcrunch.com/2026/11/19/apple-may-be-developing-its-own-ai-agent-that-runs-your-mac"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Anthropic’s 7 founders cashed out nearly $2B in record-breaking IPO: 2026-11-20T00:43:50Z",
+          "source_url": "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Meta’s new Muse Charm device may cost $300: 2026-11-19T21:58:06Z",
+          "source_url": "https://techcrunch.com/2026/11/19/metas-new-muse-charm-device-may-cost-300"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "These tech outages are giving Y2K, AI agent style: 2026-11-19T21:42:31Z",
+          "source_url": "https://techcrunch.com/2026/11/19/these-tech-outages-are-giving-y2k-ai-agent-style"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "The unfolding Jensen Huang scandal: a timeline: 2026-11-19T20:18:49Z",
+          "source_url": "https://techcrunch.com/2026/11/19/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Anthropic’s IPO could deliver $156B to charity: 2026-11-19T19:10:45Z",
+          "source_url": "https://techcrunch.com/2026/11/19/anthropics-ipo-could-deliver-156-billion-to-charity"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Google gives Gemini the ability to use your Mac for you: 2026-11-19T18:09:11Z",
+          "source_url": "https://techcrunch.com/2026/11/19/google-gives-gemini-the-ability-to-use-your-mac-for-you"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Meta’s AI agent Muse is mixing up conversations and could be exposing private data, report says: 2026-11-19T17:38:40Z",
+          "source_url": "https://techcrunch.com/2026/11/19/metas-ai-agent-muse-is-mixing-up-conversations-and-exposing-private-data-report-says"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Former Alibaba exec’s Everful raises $48.5M to connect retailers with Chinese factories: 2026-11-19T17:00:00Z",
+          "source_url": "https://techcrunch.com/2026/11/19/former-alibaba-execs-everful-raises-48-5m-to-connect-retailers-with-chinese-factories"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price: 2026-11-19T16:59:23Z",
+          "source_url": "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "At Nasdaq opening bell, Anthropic CEO recommits to pacing AI development: 2026-11-19T16:19:41Z",
+          "source_url": "https://techcrunch.com/2026/11/19/at-nasdaq-opening-bell-anthropic-ceo-recommits-to-pacing-ai-development"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Anthropic’s IPO puts AI’s circular financing boom to the test: 2026-11-19T14:54:39Z",
+          "source_url": "https://techcrunch.com/2026/11/19/anthropics-ipo-puts-ais-circular-financing-boom-to-the-test"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Superhuman pushes its Go assistant everywhere: 2026-11-19T14:00:00Z",
+          "source_url": "https://techcrunch.com/2026/11/19/superhuman-pushes-its-go-assistant-everywhere"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Microsoft CEO Satya Nadella explains why he asked 60K employees to quit: 2026-11-19T00:42:56Z",
+          "source_url": "https://techcrunch.com/2026/11/18/microsoft-ceo-satya-nadella-explains-why-he-asked-60k-employees-to-quit"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Amidst fears of AI cyberattacks, Satya Nadella says lots of critical infrastructure is ‘unpatchable’: 2026-11-18T23:45:00Z",
+          "source_url": "https://techcrunch.com/2026/11/18/amidst-fears-of-ai-cyberattacks-satya-nadella-says-lots-of-critical-infrastructure-is-unpatchable"
+        }
+      ],
+      "notes": [
+        "TechCrunch: 20 feed entries, 5 within the last 24h, 5 full-text."
+      ],
+      "source_meta": {
+        "source_name": "TechCrunch AI",
+        "source_url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+        "access_method": "RSS",
+        "authentication": "none",
+        "terms_url": "https://techcrunch.com/terms-of-use/",
+        "rate_limit": "single feed fetch per run",
+        "parser": "rss_feed",
+        "date_semantics": "RSS <published> field, timezone-aware; <updated> is never used for freshness"
+      },
+      "duration_seconds": 3.98,
+      "upsert": {
+        "inserted": 5,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "theverge_ai",
+      "record_type": "NEWS",
+      "source_url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "status": "ok",
+      "discovered": 10,
+      "accepted": 4,
+      "rejected": 6,
+      "rejections_by_reason": {
+        "stale_publication_timestamp": 6
+      },
+      "rejection_samples": [
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Apple is hiring engineers to build its own AI agent: 2026-11-19T22:31:41Z",
+          "source_url": "https://theverge.com/tech/1038227/apple-ai-agent-engineer-job-listing"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "A brief history of Nvidia’s recent stock fluctuations: 2026-11-19T21:59:35Z",
+          "source_url": "https://theverge.com/ai-artificial-intelligence/1038063/nvidia-stock-market-price-earnings"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Meta’s Muse Charm might cost $300: 2026-11-19T20:22:17Z",
+          "source_url": "https://theverge.com/tech/1038087/meta-muse-charm-ai-price"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Google is putting AI chats right on the homepage: 2026-11-19T20:05:06Z",
+          "source_url": "https://theverge.com/tech/1038059/google-search-homepage-ai-chats"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Gemini on Mac can now use your computer: 2026-11-19T18:21:13Z",
+          "source_url": "https://theverge.com/tech/1037902/google-gemini-macos-ai-computer-use"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Anthropic starts trading on Wall Street: 2026-11-19T16:52:01Z",
+          "source_url": "https://theverge.com/ai-artificial-intelligence/1035384/anthropic-ipo-trading-nasdaq"
+        }
+      ],
+      "notes": [
+        "The Verge: 10 feed entries, 4 within the last 24h, 4 full-text."
+      ],
+      "source_meta": {
+        "source_name": "The Verge AI",
+        "source_url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+        "access_method": "RSS",
+        "authentication": "none",
+        "terms_url": "https://www.voxmedia.com/legal/terms-of-use",
+        "rate_limit": "single feed fetch per run",
+        "parser": "rss_feed",
+        "date_semantics": "RSS <published> field, timezone-aware; <updated> is never used for freshness"
+      },
+      "duration_seconds": 4.23,
+      "upsert": {
+        "inserted": 4,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "wired_ai",
+      "record_type": "NEWS",
+      "source_url": "https://www.wired.com/feed/tag/ai/latest/rss",
+      "status": "ok",
+      "discovered": 10,
+      "accepted": 4,
+      "rejected": 6,
+      "rejections_by_reason": {
+        "stale_publication_timestamp": 6
+      },
+      "rejection_samples": [
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "This 16-Year-Old Founded an AI Missile Startup. He’s Targeting ‘Cost per Kill’: 2026-11-20T07:00:00Z",
+          "source_url": "https://wired.com/story/henrijs-dandzbergs-polemos-missiles-ai-warfare"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "What’s With All These Outages?: 2026-11-19T21:57:01Z",
+          "source_url": "https://wired.com/story/uncanny-valley-podcast-whats-with-all-these-outages"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "The Jensen Huang Blast Radius Has Hit His Favorite Restaurants: 2026-11-19T20:34:17Z",
+          "source_url": "https://wired.com/story/jensen-huangs-favorite-restaurants-are-caught-up-in-his-scandals-too"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Google Built a Giant ‘Mirror Dimension’ Internet to Test Its Chrome AI Agents: 2026-11-19T17:00:00Z",
+          "source_url": "https://wired.com/story/google-built-a-giant-mirror-dimension-internet-to-test-its-chrome-ai-agents"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Anthropic’s Record-Breaking IPO Highlights the AI Giant’s Worst Enemy—Itself: 2026-11-19T12:00:00Z",
+          "source_url": "https://wired.com/story/anthropics-record-breaking-ipo-highlights-the-ai-giants-worst-enemy-itself"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Does Nvidia Got This? Interim CEO Colette Kress Says It’s Got This: 2026-11-18T22:16:23Z",
+          "source_url": "https://wired.com/story/guys-really-we-got-this"
+        }
+      ],
+      "notes": [
+        "Full-text fetch unavailable for https://wired.com/story/cops-are-being-extremely-corny-about-gta-vi: NetworkError",
+        "Full-text fetch unavailable for https://wired.com/story/jensen-huangs-lying-alarmed-nvidia-board-ahead-of-his-resignation: NetworkError",
+        "Full-text fetch unavailable for https://wired.com/story/muse-is-unleashing-a-world-of-pettiness-on-instagram: NetworkError",
+        "Full-text fetch unavailable for https://wired.com/story/regular-tech-bros-are-worried-about-honeypots: NetworkError",
+        "WIRED: 10 feed entries, 4 within the last 24h, 0 full-text."
+      ],
+      "source_meta": {
+        "source_name": "WIRED AI",
+        "source_url": "https://www.wired.com/feed/tag/ai/latest/rss",
+        "access_method": "RSS",
+        "authentication": "none",
+        "terms_url": "https://www.condenast.com/user-agreement",
+        "rate_limit": "single feed fetch per run",
+        "parser": "rss_feed",
+        "date_semantics": "RSS <published> field, timezone-aware; <updated> is never used for freshness"
+      },
+      "duration_seconds": 2.99,
+      "upsert": {
+        "inserted": 4,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "arstechnica",
+      "record_type": "NEWS",
+      "source_url": "https://feeds.arstechnica.com/arstechnica/technology-lab",
+      "status": "ok",
+      "discovered": 20,
+      "accepted": 1,
+      "rejected": 19,
+      "rejections_by_reason": {
+        "stale_publication_timestamp": 19
+      },
+      "rejection_samples": [
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Man hired by Russia spied on Silicon Valley tech and defense company, feds say: 2026-11-19T20:29:46Z",
+          "source_url": "https://arstechnica.com/security/2026/11/man-charged-with-spying-on-silicon-valley-tech-and-defense-company-for-russia"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "How to tell a cyberattack from a plain old outage: 2026-11-19T11:13:01Z",
+          "source_url": "https://arstechnica.com/security/2026/11/how-to-tell-a-cyberattack-from-a-plain-old-outage"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Hundreds of websites deliver potent malware cocktail to unsuspecting visitors: 2026-11-17T22:32:16Z",
+          "source_url": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Grok Bot took unapproved actions, ignored orders to stop, and then denied it: 2026-11-17T14:00:29Z",
+          "source_url": "https://arstechnica.com/security/2026/11/grok-bot-took-unapproved-actions-ignored-orders-to-stop-and-then-denied-it"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Shareholders sue Intel, its CEO, and CFO after stock drops 28.6 percent in one day: 2026-11-16T20:37:47Z",
+          "source_url": "https://arstechnica.com/tech-policy/2026/11/shareholders-sue-intel-its-ceo-and-cfo-after-stock-drops-28-6-percent-in-one-day"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Windows 0-day dropped by disgruntled researcher hands hackers System rights: 2026-11-13T16:26:32Z",
+          "source_url": "https://arstechnica.com/security/2026/11/windows-0-day-dropped-by-disgruntled-researcher-hands-hackers-system-rights"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Grok Build coding agent leaks oodles of confidential info, some belonging to SpaceXSI: 2026-11-10T21:12:59Z",
+          "source_url": "https://arstechnica.com/security/2026/11/grok-build-coding-agent-leaks-oodles-of-confidential-info-some-belonging-to-spacexsi"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Vulnerability that lets hackers SSH into Linux devices is under active exploitation: 2026-11-09T19:41:34Z",
+          "source_url": "https://arstechnica.com/security/2026/11/vulnerability-that-lets-hackers-ssh-into-linux-devices-is-under-active-exploitation"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Chainalysis says hackers stole credentials and tokens for all of its customers: 2026-11-06T20:56:41Z",
+          "source_url": "https://arstechnica.com/security/2026/11/chainalysis-says-hackers-stole-credentials-and-tokens-for-all-of-its-customers"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Meet *sshole, the vulnerability that lets hackers SSH into Linux devices: 2026-11-05T23:09:36Z",
+          "source_url": "https://arstechnica.com/security/2026/11/vulnerability-allows-attackers-to-log-into-some-linux-devices-sans-password"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Hackers exploited iOS and Android flaws to infect phones: 2026-11-04T22:26:49Z",
+          "source_url": "https://arstechnica.com/security/2026/11/hackers-exploited-ios-and-android-flaws-to-infect-phones"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "VMware releases vSphere Express for virtualization on up to 128 cores: 2026-11-04T21:38:49Z",
+          "source_url": "https://arstechnica.com/information-technology/2026/11/vmware-releases-vsphere-express-for-virtualization-on-up-to-128-cores"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Binance says hackers who stole billions in crypto spent months planning heist: 2026-11-04T16:06:03Z",
+          "source_url": "https://arstechnica.com/information-technology/2026/11/binance-says-hackers-who-stole-billions-in-crypto-spent-months-planning-heist"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "UEFI bootkit infected fully patched Windows machines. Is Microsoft to blame?: 2026-11-03T16:03:13Z",
+          "source_url": "https://arstechnica.com/security/2026/11/uefi-bootkit-infected-fully-patched-windows-machines-is-microsoft-to-blame"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Anthropic VS code extension on Cursor backdoored for nearly 12 hours: 2026-10-30T21:09:54Z",
+          "source_url": "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours"
+        }
+      ],
+      "notes": [
+        "Full-text fetch unavailable for https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate: HttpError",
+        "Ars Technica: 20 feed entries, 1 within the last 24h, 0 full-text."
+      ],
+      "source_meta": {
+        "source_name": "Ars Technica",
+        "source_url": "https://feeds.arstechnica.com/arstechnica/technology-lab",
+        "access_method": "RSS",
+        "authentication": "none",
+        "terms_url": "https://arstechnica.com/terms-of-service/",
+        "rate_limit": "single feed fetch per run",
+        "parser": "rss_feed",
+        "date_semantics": "RSS <published> field, timezone-aware; <updated> is never used for freshness"
+      },
+      "duration_seconds": 2.85,
+      "upsert": {
+        "inserted": 1,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "mit_tech_review",
+      "record_type": "NEWS",
+      "source_url": "https://www.technologyreview.com/feed/",
+      "status": "ok",
+      "discovered": 10,
+      "accepted": 2,
+      "rejected": 8,
+      "rejections_by_reason": {
+        "stale_publication_timestamp": 8
+      },
+      "rejection_samples": [
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "The Download: a living liver, a billion-dollar battery deal, and AI hype: 2026-11-19T13:10:00Z",
+          "source_url": "https://technologyreview.com/2026/11/19/1148979/the-download-liver-kept-alive-sila-battery-deal-ai-hype"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "A human liver has been kept alive outside the body for a record seven weeks: 2026-11-19T12:00:00Z",
+          "source_url": "https://technologyreview.com/2026/11/19/1148934/a-human-liver-has-been-kept-alive-outside-the-body-for-seven-weeks-setting-a-record"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "What a billion-dollar deal says about the US battery market: 2026-11-19T11:00:00Z",
+          "source_url": "https://technologyreview.com/2026/11/19/1148922/sila-panasonic-battery-deal"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "The AI Hype Index: AI is everywhere: 2026-11-18T14:42:44Z",
+          "source_url": "https://technologyreview.com/2026/11/18/1148650/ai-hype-index-ai-is-everywhere"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "The Download: AI learns to smell and hydropower struggles: 2026-11-18T13:10:00Z",
+          "source_url": "https://technologyreview.com/2026/11/18/1148845/the-download-ai-learns-to-smell-hydropower-struggles"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "This smell startup says its AI nose is as good as a human’s: 2026-11-18T10:20:30Z",
+          "source_url": "https://technologyreview.com/2026/11/18/1148816/smell-startup-osmo-ai-nose-good-as-humans"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Roundtables: Inside the Quest for Cognitive Immortality: 2026-11-17T18:46:47Z",
+          "source_url": "https://technologyreview.com/2026/11/17/1148049/roundtables-inside-the-quest-for-cognitive-immortality"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Hydropower hit record lows in the US Southwest this summer: 2026-11-17T17:52:10Z",
+          "source_url": "https://technologyreview.com/2026/11/17/1148742/hydropower-drought-colorado-river"
+        }
+      ],
+      "notes": [
+        "MIT Technology Review: 10 feed entries, 2 within the last 24h, 2 full-text."
+      ],
+      "source_meta": {
+        "source_name": "MIT Technology Review",
+        "source_url": "https://www.technologyreview.com/feed/",
+        "access_method": "RSS",
+        "authentication": "none",
+        "terms_url": "https://www.technologyreview.com/terms-of-service/",
+        "rate_limit": "single feed fetch per run",
+        "parser": "rss_feed",
+        "date_semantics": "RSS <published> field, timezone-aware; <updated> is never used for freshness"
+      },
+      "duration_seconds": 4.62,
+      "upsert": {
+        "inserted": 2,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "himalayas",
+      "record_type": "JOB",
+      "source_url": "https://himalayas.app/jobs/api",
+      "status": "ok",
+      "discovered": 120,
+      "accepted": 43,
+      "rejected": 77,
+      "rejections_by_reason": {
+        "not_ai_related": 77
+      },
+      "rejection_samples": [
+        {
+          "reason": "not_ai_related",
+          "detail": "Stefanini — Diseñador UI (Design System & Aplicaciones Mobile) - Proyecto de 3 meses",
+          "source_url": "https://himalayas.app/companies/stefanini/jobs/disenador-ui-design-system-aplicaciones-mobile-proyecto-de-3-meses"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Elite Recruiting Services — AUTOMOTIVE COMMERCIAL & FLEET SALES",
+          "source_url": "https://himalayas.app/companies/elite-recruiting-services/jobs/automotive-commercial-fleet-sales"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "LifeNet Health — Donor Logistics Coordinator",
+          "source_url": "https://himalayas.app/companies/lifenet-health/jobs/donor-logistics-coordinator"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Eracore — Senior VDC Engineer - LATAM",
+          "source_url": "https://himalayas.app/companies/eracore/jobs/senior-vdc-engineer-latam"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Abbott — Associate Director, Field Health Economics & Reimbursement- REMOTE",
+          "source_url": "https://himalayas.app/companies/abbott/jobs/associate-director-field-health-economics-reimbursement-remote"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Cummins — Customer Quality Specialist",
+          "source_url": "https://himalayas.app/companies/cummins/jobs/customer-quality-specialist"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "University of Oklahoma — Senior Program Coordinator",
+          "source_url": "https://himalayas.app/companies/university-of-oklahoma/jobs/senior-program-coordinator"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "TriSalus Life Sciences, Inc. — Clinical Sales Specialist, Houston",
+          "source_url": "https://himalayas.app/companies/trisalus-life-sciences-inc/jobs/clinical-sales-specialist-houston"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "medpace — Experienced Clinical Research Associate (Beijing)",
+          "source_url": "https://himalayas.app/companies/medpace/jobs/experienced-clinical-research-associate-beijing"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Alliant Insurance Services, Inc. — Benefit Advocate I",
+          "source_url": "https://himalayas.app/companies/alliant-insurance-services-inc/jobs/benefit-advocate-i-7359067925"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Waterstone Mortgage — Production Partner II",
+          "source_url": "https://himalayas.app/companies/waterstone-mortgage/jobs/production-partner-ii"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Buchhalterwerk — Elektroingenieur (m/w/d) Homeoffice-Optionen",
+          "source_url": "https://himalayas.app/companies/buchhalterwerk/jobs/elektroingenieur-m-w-d-homeoffice-optionen"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Twtspain — SAP Project Manager – International Roll-out – Remote (Spain)",
+          "source_url": "https://himalayas.app/companies/twtspain/jobs/sap-project-manager-international-roll-out-remote-spain"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Worksoft — Sales Engineer",
+          "source_url": "https://himalayas.app/companies/worksoft/jobs/sales-engineer"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Omie — Analista de Retenção PL - Renovação",
+          "source_url": "https://himalayas.app/companies/omie/jobs/analista-de-retencao-pl-renovacao"
+        }
+      ],
+      "notes": [
+        "himalayas: 120 raw listings, 43 AI/tech listings within 24h."
+      ],
+      "source_meta": {
+        "source_name": "Himalayas",
+        "source_url": "https://himalayas.app/jobs/api",
+        "access_method": "public JSON API (cursor pagination)",
+        "authentication": "none",
+        "terms_url": "https://himalayas.app/terms",
+        "rate_limit": "1 request/second enforced client-side",
+        "parser": "himalayas_json",
+        "date_semantics": "publication timestamp from field 'pubDate'; crawl time is never substituted"
+      },
+      "duration_seconds": 5.87,
+      "upsert": {
+        "inserted": 43,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "remotive",
+      "record_type": "JOB",
+      "source_url": "https://remotive.com/api/remote-jobs",
+      "status": "ok",
+      "discovered": 16,
+      "accepted": 0,
+      "rejected": 16,
+      "rejections_by_reason": {
+        "invalid_publication_date": 16
+      },
+      "rejection_samples": [
+        {
+          "reason": "invalid_publication_date",
+          "detail": "TELUS Digital — Content Reviewer - United States: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/all-others/content-reviewer-united-states-2091177"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Mitre Media — Tech Lead Full-Stack Rails Engineer: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Metics Media — Content Creator - YouTube: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/marketing/content-creator-youtube-2091173"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Coalition Technologies — Remote Office Assistant: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/marketing/remote-office-assistant-1680495"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Lemon.io — Senior Data Engineer: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/data/senior-data-engineer-2091137"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "ShyftOff — Customer Service Representative: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/customer-service/customer-service-representative-2091171"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Lemon.io — Senior React Full-stack Developer: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/software-development/senior-react-full-stack-developer-2091136"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Credit Wellness, LLC — Inside Sales Contractor: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/sales/inside-sales-contractor-2086540"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Unio Digital — Tier III Service Desk Engineer: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/information-technology/tier-iii-service-desk-engineer-2091045"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "VXI Global Solutions — US Remote Patient Care Advocate (Customer Service): timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/customer-service/us-remote-patient-care-advocate-customer-service-2091168"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "IAPWE — Freelance Writer: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/writing/freelance-writer-1185979"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "TELUS Digital — Content Reviewer - United States: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/all-others/content-reviewer-united-states-2091166"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Coalition Technologies — Freelance Copywriter: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/writing/freelance-copywriter-1749306"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Fluence International, Inc. — Full-Stack Developer: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/software-development/full-stack-developer-2091165"
+        },
+        {
+          "reason": "invalid_publication_date",
+          "detail": "Lemon.io — Senior Back-end Developer: timezone missing; publication time cannot be verified",
+          "source_url": "https://remotive.com/remote-jobs/software-development/senior-back-end-developer-2091135"
+        }
+      ],
+      "notes": [
+        "remotive: 16 raw listings, 0 AI/tech listings within 24h."
+      ],
+      "source_meta": {
+        "source_name": "Remotive",
+        "source_url": "https://remotive.com/api/remote-jobs",
+        "access_method": "public JSON API",
+        "authentication": "none",
+        "terms_url": "https://remotive.com/terms",
+        "rate_limit": "1 request/second enforced client-side",
+        "parser": "remotive_json",
+        "date_semantics": "publication timestamp from field 'publication_date'; crawl time is never substituted"
+      },
+      "duration_seconds": 1.58,
+      "upsert": {
+        "inserted": 0,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "remoteok",
+      "record_type": "JOB",
+      "source_url": "https://remoteok.com/api",
+      "status": "ok",
+      "discovered": 99,
+      "accepted": 0,
+      "rejected": 99,
+      "rejections_by_reason": {
+        "stale_publication_timestamp": 99
+      },
+      "rejection_samples": [
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Rubrik Job Board — Advisory Solutions Architect, MSP (New Product Intro)",
+          "source_url": "https://remoteok.com/remote-jobs/remote-advisory-solutions-architect-msp-new-product-intro-rubrik-job-board-1137896"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Talkspace — Virtual IOP Clinician â Florida & Texas",
+          "source_url": "https://remoteok.com/remote-jobs/remote-virtual-iop-clinician-florida-texas-talkspace-1137895"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Reddit — Product Manager, Ecosystem Relevance",
+          "source_url": "https://remoteok.com/remote-jobs/remote-product-manager-ecosystem-relevance-reddit-1137894"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Reddit — Product Manager, AI Foundations",
+          "source_url": "https://remoteok.com/remote-jobs/remote-product-manager-ai-foundations-reddit-1137893"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Stripe — Analyst Relations Senior Manager",
+          "source_url": "https://remoteok.com/remote-jobs/remote-analyst-relations-senior-manager-stripe-1137892"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "LaunchDarkly — Sales Commissions Analyst",
+          "source_url": "https://remoteok.com/remote-jobs/remote-sales-commissions-analyst-launchdarkly-1137891"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "BeyondTrust — Sr Director, L2C Process Owner",
+          "source_url": "https://remoteok.com/remote-jobs/remote-sr-director-l2c-process-owner-beyondtrust-1137890"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "BeyondTrust — Lead-to-Cash Business Partner",
+          "source_url": "https://remoteok.com/remote-jobs/remote-lead-to-cash-business-partner-beyondtrust-1137889"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Talkspace — Intake and Discharge Clinician",
+          "source_url": "https://remoteok.com/remote-jobs/remote-intake-and-discharge-clinician-talkspace-1137888"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Storyblok — Senior DevOps Engineer II - Europe",
+          "source_url": "https://remoteok.com/remote-jobs/remote-senior-devops-engineer-ii-europe-storyblok-1137887"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "6sense — Sr. Product Manager",
+          "source_url": "https://remoteok.com/remote-jobs/remote-sr-product-manager-6sense-1137886"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Oportun — Senior Director of Product Management (R14361)",
+          "source_url": "https://remoteok.com/remote-jobs/remote-senior-director-of-product-management-r14361-oportun-1137885"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Ping Identity — Director, Sales",
+          "source_url": "https://remoteok.com/remote-jobs/remote-director-sales-ping-identity-1137884"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Clover Health — Technical Chief of Staff to the CTO",
+          "source_url": "https://remoteok.com/remote-jobs/remote-technical-chief-of-staff-to-the-cto-clover-health-1137883"
+        },
+        {
+          "reason": "stale_publication_timestamp",
+          "detail": "Galileo — Per Diem Digital Clinician | MD/DO (CA license)",
+          "source_url": "https://remoteok.com/remote-jobs/remote-per-diem-digital-clinician-md-do-ca-license-galileo-1137882"
+        }
+      ],
+      "notes": [
+        "remoteok: 99 raw listings, 0 AI/tech listings within 24h."
+      ],
+      "source_meta": {
+        "source_name": "Remote OK",
+        "source_url": "https://remoteok.com/api",
+        "access_method": "public JSON API",
+        "authentication": "none",
+        "terms_url": "https://remoteok.com/terms",
+        "rate_limit": "1 request/second enforced client-side",
+        "parser": "remoteok_json",
+        "date_semantics": "publication timestamp from field 'date'; crawl time is never substituted"
+      },
+      "duration_seconds": 1.38,
+      "upsert": {
+        "inserted": 0,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "arbeitnow",
+      "record_type": "JOB",
+      "source_url": "https://www.arbeitnow.com/api/job-board-api",
+      "status": "ok",
+      "discovered": 300,
+      "accepted": 107,
+      "rejected": 193,
+      "rejections_by_reason": {
+        "not_ai_related": 174,
+        "stale_publication_timestamp": 19
+      },
+      "rejection_samples": [
+        {
+          "reason": "not_ai_related",
+          "detail": "capco — (Senior) Consultant* - Murex/Capital Markets (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/capco/senior-consultant-murex-capital-markets-53847"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "capco — (Senior) Consultant* - Murex/Capital Markets (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/capco/senior-consultant-murex-capital-markets-232621"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "capco — (Senior) Consultant* - Murex/Capital Markets (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/capco/senior-consultant-murex-capital-markets-478041"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "capco — (Senior) Consultant* - Murex/Capital Markets (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/capco/senior-consultant-murex-capital-markets-147210"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "capco — (Senior) Consultant* - Murex/Capital Markets (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/capco/senior-consultant-murex-capital-markets-165700"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Getyourguide — Senior IT Risk & Controls Analyst",
+          "source_url": "https://arbeitnow.com/jobs/companies/getyourguide/senior-it-risk-controls-analyst-berlin-279696"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Goegmbh — Frontend Engineer (m/f/x)",
+          "source_url": "https://arbeitnow.com/jobs/companies/goegmbh/frontend-engineer-berlin-143307"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "nice — Partner Success Manager, Technical Lead - German Speaking",
+          "source_url": "https://arbeitnow.com/jobs/companies/nice/partner-success-manager-technical-lead-german-speaking-428445"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Doctolib — IT Support Spezialist - Telematikinfrastruktur & Healthcare IT/APIs(x/f/m)",
+          "source_url": "https://arbeitnow.com/jobs/companies/doctolib/it-support-spezialist-telematikinfrastruktur-healthcare-it-apis-berlin-60362"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Rohlik — Techniker (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/rohlik/techniker-garching-bei-munchen-140664"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Rohlik — Qualitätsmitarbeiter Lebensmittel (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/rohlik/qualitatsmitarbeiter-lebensmittel-bischofsheim-36999"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Efficioconsulting — UnternehmensberaterIn - Senior Consultant - Dusseldorf",
+          "source_url": "https://arbeitnow.com/jobs/companies/efficioconsulting/unternehmensberaterin-senior-consultant-dusseldorf-141766"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Heaten Germany Gmbh — Qualitätsmanagement & Qualitätssicherung Specialist (m/w/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/heaten-germany-gmbh/qualitatsmanagement-qualitatssicherung-specialist-remscheid-87669"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Qualysoft — ServiceNow Solution / Platform Architect (m/f/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/qualysoft/servicenow-solution-platform-architect-open-124588"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "mewssystems — Senior Media Relations Manager (m/f/d)",
+          "source_url": "https://arbeitnow.com/jobs/companies/mewssystems/senior-media-relations-manager-36392"
+        }
+      ],
+      "notes": [
+        "arbeitnow: 300 raw listings, 107 AI/tech listings within 24h."
+      ],
+      "source_meta": {
+        "source_name": "Arbeitnow",
+        "source_url": "https://www.arbeitnow.com/api/job-board-api",
+        "access_method": "public JSON API",
+        "authentication": "none",
+        "terms_url": "https://www.arbeitnow.com/terms",
+        "rate_limit": "1 request/second enforced client-side",
+        "parser": "arbeitnow_json",
+        "date_semantics": "publication timestamp from field 'created_at'; crawl time is never substituted"
+      },
+      "duration_seconds": 2.37,
+      "upsert": {
+        "inserted": 107,
+        "updated": 0,
+        "unchanged": 0
+      }
+    },
+    {
+      "source": "jobicy",
+      "record_type": "JOB",
+      "source_url": "https://jobicy.com/api/v2/remote-jobs",
+      "status": "ok",
+      "discovered": 100,
+      "accepted": 64,
+      "rejected": 36,
+      "rejections_by_reason": {
+        "not_ai_related": 36
+      },
+      "rejection_samples": [
+        {
+          "reason": "not_ai_related",
+          "detail": "Nash — Enterprise Solutions Consultant, ANZ",
+          "source_url": "https://jobicy.com/jobs/156246-enterprise-solutions-consultant-anz"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Supabase — Database Support Engineer (Japanese Speaking)",
+          "source_url": "https://jobicy.com/jobs/156249-database-support-engineer-japanese-speaking"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Ashby — Manager, Product Support - APAC",
+          "source_url": "https://jobicy.com/jobs/156244-manager-product-support-apac"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Cordance — Account Executive",
+          "source_url": "https://jobicy.com/jobs/156225-account-executive-26"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "MaintainX — Mid-Market Account Executive",
+          "source_url": "https://jobicy.com/jobs/156261-mid-market-account-executive-7"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "MaintainX — Mid-Market Account Executive - EMEA",
+          "source_url": "https://jobicy.com/jobs/156260-mid-market-account-executive-emea-2"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "MaintainX — Inside Sales Representative - Enterprise",
+          "source_url": "https://jobicy.com/jobs/156258-inside-sales-representative-enterprise"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Carrot — Sr. IT Systems Engineer",
+          "source_url": "https://jobicy.com/jobs/156214-sr-it-systems-engineer-2"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Spotify — Senior Product Manager - Audiobooks Format Foundations",
+          "source_url": "https://jobicy.com/jobs/156179-senior-product-manager-audiobooks-format-foundations"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Alimentiv — Clinical Operations Lead",
+          "source_url": "https://jobicy.com/jobs/156227-clinical-operations-lead-2"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Spotify — Senior Web Engineer - Subscriptions",
+          "source_url": "https://jobicy.com/jobs/156186-senior-web-engineer-subscriptions"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Monzo — Engineering Manager",
+          "source_url": "https://jobicy.com/jobs/156122-engineering-manager-10"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "OKX — VIP Relationship Manager, Poland",
+          "source_url": "https://jobicy.com/jobs/156174-vip-relationship-manager-poland"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Mozilla — Contract Staff Software Engineer - (Firefox) C++,Storage Encryption",
+          "source_url": "https://jobicy.com/jobs/156176-contract-staff-software-engineer-firefox-cstorage-encryption"
+        },
+        {
+          "reason": "not_ai_related",
+          "detail": "Binance — Global Financial Crime/Sanctions Legal Counsel",
+          "source_url": "https://jobicy.com/jobs/153656-global-financial-crime-sanctions-legal-counsel"
+        }
+      ],
+      "notes": [
+        "jobicy: 100 raw listings, 64 AI/tech listings within 24h."
+      ],
+      "source_meta": {
+        "source_name": "Jobicy",
+        "source_url": "https://jobicy.com/api/v2/remote-jobs",
+        "access_method": "public JSON API",
+        "authentication": "none",
+        "terms_url": "https://jobicy.com/terms",
+        "rate_limit": "1 request/second enforced client-side",
+        "parser": "jobicy_json",
+        "date_semantics": "publication timestamp from field 'pubDate'; crawl time is never substituted"
+      },
+      "duration_seconds": 2.84,
+      "upsert": {
+        "inserted": 64,
+        "updated": 0,
+        "unchanged": 0
+      }
+    }
+  ],
+  "source_runs": [
+    {
+      "source_name": "arbeitnow",
+      "source_url": "https://www.arbeitnow.com/api/job-board-api",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 300,
+      "records_accepted": 107,
+      "records_rejected": 193,
+      "error": null
+    },
+    {
+      "source_name": "arstechnica",
+      "source_url": "https://feeds.arstechnica.com/arstechnica/technology-lab",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 20,
+      "records_accepted": 1,
+      "records_rejected": 19,
+      "error": null
+    },
+    {
+      "source_name": "arxiv",
+      "source_url": "https://export.arxiv.org/api/query",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 1600,
+      "records_accepted": 1314,
+      "records_rejected": 286,
+      "error": null
+    },
+    {
+      "source_name": "himalayas",
+      "source_url": "https://himalayas.app/jobs/api",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 120,
+      "records_accepted": 43,
+      "records_rejected": 77,
+      "error": null
+    },
+    {
+      "source_name": "huggingface_spaces",
+      "source_url": "https://huggingface.co/api/spaces",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 800,
+      "records_accepted": 494,
+      "records_rejected": 306,
+      "error": null
+    },
+    {
+      "source_name": "jobicy",
+      "source_url": "https://jobicy.com/api/v2/remote-jobs",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 100,
+      "records_accepted": 64,
+      "records_rejected": 36,
+      "error": null
+    },
+    {
+      "source_name": "mit_tech_review",
+      "source_url": "https://www.technologyreview.com/feed/",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 10,
+      "records_accepted": 2,
+      "records_rejected": 8,
+      "error": null
+    },
+    {
+      "source_name": "producthunt",
+      "source_url": "https://www.producthunt.com/feed?category=ai-software",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 50,
+      "records_accepted": 19,
+      "records_rejected": 31,
+      "error": null
+    },
+    {
+      "source_name": "remoteok",
+      "source_url": "https://remoteok.com/api",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 99,
+      "records_accepted": 0,
+      "records_rejected": 99,
+      "error": null
+    },
+    {
+      "source_name": "remotive",
+      "source_url": "https://remotive.com/api/remote-jobs",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 16,
+      "records_accepted": 0,
+      "records_rejected": 16,
+      "error": null
+    },
+    {
+      "source_name": "showhn",
+      "source_url": "https://hn.algolia.com/api/v1/search_by_date",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 5286,
+      "records_accepted": 1977,
+      "records_rejected": 3309,
+      "error": null
+    },
+    {
+      "source_name": "techcrunch_ai",
+      "source_url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 20,
+      "records_accepted": 5,
+      "records_rejected": 15,
+      "error": null
+    },
+    {
+      "source_name": "theverge_ai",
+      "source_url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 10,
+      "records_accepted": 4,
+      "records_rejected": 6,
+      "error": null
+    },
+    {
+      "source_name": "wired_ai",
+      "source_url": "https://www.wired.com/feed/tag/ai/latest/rss",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 10,
+      "records_accepted": 4,
+      "records_rejected": 6,
+      "error": null
+    },
+    {
+      "source_name": "yc_ai",
+      "source_url": "https://yc-oss.github.io/api/tags/ai.json",
+      "last_run_at": "2026-11-21T07:25:42Z",
+      "last_success_at": "2026-11-21T07:25:42Z",
+      "status": "ok",
+      "records_discovered": 1906,
+      "records_accepted": 1894,
+      "records_rejected": 12,
+      "error": null
+    }
+  ],
+  "rejections": {
+    "by_reason": {
+      "not_ai_related": 753,
+      "duplicate_in_source": 334,
+      "missing_description": 306,
+      "stale_publication_timestamp": 172,
+      "missing_product_url": 29,
+      "invalid_publication_date": 16
+    },
+    "cross_source_duplicates_removed": 0,
+    "duplicate_startup_domains": {}
+  },
+  "missing_fields": {
+    "STARTUP": {
+      "content.entityName": {
+        "present": 1894,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.data.employeeCount": {
+        "present": 1856,
+        "missing": 38,
+        "missing_pct": 2.01
+      },
+      "content.website": {
+        "present": 1870,
+        "missing": 24,
+        "missing_pct": 1.27
+      },
+      "content.description": {
+        "present": 1892,
+        "missing": 2,
+        "missing_pct": 0.11
+      },
+      "content.foundedYear": {
+        "present": 1894,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.industry": {
+        "present": 1894,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.headquarters": {
+        "present": 1868,
+        "missing": 26,
+        "missing_pct": 1.37
+      },
+      "provenance.recordUrl": {
+        "present": 1894,
+        "missing": 0,
+        "missing_pct": 0.0
+      }
+    },
+    "PRODUCT": {
+      "content.entityName": {
+        "present": 2490,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.startupName": {
+        "present": 10,
+        "missing": 2480,
+        "missing_pct": 99.6
+      },
+      "content.pricingModel": {
+        "present": 2490,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.productUrl": {
+        "present": 2490,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.description": {
+        "present": 1244,
+        "missing": 1246,
+        "missing_pct": 50.04
+      },
+      "content.category": {
+        "present": 1996,
+        "missing": 494,
+        "missing_pct": 19.84
+      },
+      "provenance.recordUrl": {
+        "present": 2490,
+        "missing": 0,
+        "missing_pct": 0.0
+      }
+    },
+    "RESEARCH_PAPER": {
+      "content.title": {
+        "present": 1314,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.authors": {
+        "present": 1314,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.paper_url": {
+        "present": 1314,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.github_url": {
+        "present": 170,
+        "missing": 1144,
+        "missing_pct": 87.06
+      },
+      "content.github_stars": {
+        "present": 164,
+        "missing": 1150,
+        "missing_pct": 87.52
+      },
+      "content.github_checked_at": {
+        "present": 164,
+        "missing": 1150,
+        "missing_pct": 87.52
+      },
+      "content.published_date": {
+        "present": 1314,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.abstract": {
+        "present": 1314,
+        "missing": 0,
+        "missing_pct": 0.0
+      }
+    },
+    "JOB": {
+      "content.company": {
+        "present": 214,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.date": {
+        "present": 214,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.is_remote": {
+        "present": 214,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.role_family": {
+        "present": 214,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.title": {
+        "present": 214,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.job_url": {
+        "present": 214,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "provenance.dateEvidence": {
+        "present": 214,
+        "missing": 0,
+        "missing_pct": 0.0
+      }
+    },
+    "NEWS": {
+      "content.title": {
+        "present": 16,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.date": {
+        "present": 16,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.publisher": {
+        "present": 16,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.full_text": {
+        "present": 11,
+        "missing": 5,
+        "missing_pct": 31.25
+      },
+      "content.summary": {
+        "present": 16,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "content.article_url": {
+        "present": 16,
+        "missing": 0,
+        "missing_pct": 0.0
+      },
+      "provenance.dateEvidence": {
+        "present": 16,
+        "missing": 0,
+        "missing_pct": 0.0
+      }
+    }
+  },
+  "freshness": {
+    "policy": {
+      "max_age_hours": 24,
+      "clock_skew_minutes": 5
+    },
+    "news": {
+      "records": 16,
+      "verified": 16,
+      "date_range": {
+        "min": "2026-11-20T11:00:00Z",
+        "max": "2026-11-20T23:24:02Z",
+        "count": 16
+      },
+      "full_text": 11,
+      "summary_only": 5
+    },
+    "jobs": {
+      "records": 214,
+      "verified": 214,
+      "date_range": {
+        "min": "2026-11-20T09:40:13Z",
+        "max": "2026-11-21T07:03:43Z",
+        "count": 214
+      },
+      "remote_true": 114
+    },
+    "rejections": {
+      "stale_publication_timestamp": 172,
+      "invalid_publication_date": 16
+    }
+  },
+  "github_enrichment": {
+    "papers": 1314,
+    "papers_with_explicit_repo": 170,
+    "papers_with_star_count": 164,
+    "median_stars": 0.0,
+    "max_stars": 38630,
+    "checked_at_present": 164
+  },
+  "entity_resolution": {
+    "decisions": {
+      "NO_MATCH": 2413,
+      "REVIEW_REQUIRED": 67,
+      "AUTO_MATCHED": 10
+    },
+    "methods": {
+      "not_name_like": 1918,
+      "fuzzy_token_set": 562,
+      "alias_match": 4,
+      "domain_match": 6
+    },
+    "manual_review_required": 67,
+    "auto_matched": 10
+  },
+  "llm_extraction": {
+    "status": "pending",
+    "record_type": "PRODUCT",
+    "attempted": 0,
+    "successes": 0,
+    "failures": 0,
+    "updated": 0,
+    "provider_health": [],
+    "reason": "No provider credentials: set GEMINI_API_KEY, GROQ_API_KEY or DEEPSEEK_API_KEY. Records and raw content are preserved; no field was guessed."
+  },
+  "api_failures": [],
+  "tests": {
+    "passed": 53,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "total": 53,
+    "source": "pytest --junitxml data/processed/junit.xml"
+  },
+  "database": {
+    "database_path": "/home/arghya/Projects/ai signal project/data/frontieratlas.db",
+    "total_records": 5928,
+    "records_by_type": {
+      "JOB": 214,
+      "NEWS": 16,
+      "PRODUCT": 2490,
+      "RESEARCH_PAPER": 1314,
+      "STARTUP": 1894
+    },
+    "entity_mappings": 2490,
+    "size_bytes": 15044608
+  }
+}

@@ -1,0 +1,90 @@
+project:
+  name: FrontierAtlas
+  schema_version: "1.0"
+
+http:
+  timeout_seconds: 30
+  connect_timeout_seconds: 10
+  max_retries: 4
+  base_backoff_seconds: 1.0
+  max_backoff_seconds: 45
+  global_concurrency: 8
+  per_domain_concurrency: 2
+  default_min_interval_seconds: 0.25
+  user_agent: "FrontierAtlasBot/1.0 (+https://github.com/officialarghya29/frontieratlas-pipeline; AI research data collection; contact: officialarghya29@gmail.com)"
+  rate_limits:
+    export.arxiv.org: 3.0
+    hn.algolia.com: 0.5
+    api.github.com: 0.4
+    huggingface.co: 1.0
+    himalayas.app: 1.0
+    remotive.com: 1.0
+    remoteok.com: 1.0
+    arbeitnow.com: 1.0
+    jobicy.com: 1.0
+
+freshness:
+  max_age_hours: 24
+  clock_skew_minutes: 5
+
+storage:
+  database_path: data/frontieratlas.db
+  raw_dir: data/raw
+  processed_dir: data/processed
+  export_dir: data/exports
+
+llm:
+  enabled: true
+  # Provider order is also the fallback order.
+  providers:
+    - name: gemini
+      api_key_env: GEMINI_API_KEY
+      model_env: GEMINI_MODEL
+      default_model: gemini-2.0-flash
+      endpoint: "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+      max_input_chars: 24000
+    - name: groq
+      api_key_env: GROQ_API_KEY
+      model_env: GROQ_MODEL
+      default_model: llama-3.3-70b-versatile
+      endpoint: "https://api.groq.com/openai/v1/chat/completions"
+      max_input_chars: 20000
+    - name: deepseek
+      api_key_env: DEEPSEEK_API_KEY
+      model_env: DEEPSEEK_MODEL
+      default_model: deepseek-chat
+      endpoint: "https://api.deepseek.com/chat/completions"
+      max_input_chars: 20000
+  request_timeout_seconds: 90
+  max_retries_per_provider: 2
+  retry_base_seconds: 2
+  retry_max_seconds: 30
+  circuit_break_after_failures: 3
+  # 413 mitigation: split content into semantic chunks of at most N characters
+  # with paragraph overlap, extract each chunk, merge deterministically.
+  chunk_target_chars: 12000
+  chunk_overlap_chars: 600
+
+entity_resolution:
+  exact_threshold: 100
+  alias_threshold: 98
+  domain_threshold: 95
+  # Fuzzy auto-merge is intentionally strict: comparable name length, high
+  # token-set score AND high character ratio. Everything else is review-only.
+  auto_merge_threshold: 97
+  review_threshold: 80
+  min_auto_length_ratio: 0.8
+  min_auto_character_ratio: 90
+  name_max_tokens: 5
+  name_max_chars: 60
+  seed_entity_file: config/seed_entities.txt
+
+sheets:
+  spreadsheet_title: "FrontierAtlas — AI Ecosystem Dataset"
+  tabs:
+    STARTUP: Startups
+    PRODUCT: Products
+    RESEARCH_PAPER: Research Papers
+    JOB: Jobs
+    NEWS: News
+    ENTITY_MAPPING: Entity Mapping Log

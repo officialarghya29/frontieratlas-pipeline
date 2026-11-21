@@ -1,0 +1,83 @@
+# Canonical AI startup seed entities.
+# These names assist entity resolution only. They are NOT dataset records and
+# are never exported as collected startups.
+OpenAI
+Anthropic
+Cohere
+Mistral AI
+Hugging Face
+Stability AI
+Scale AI
+Databricks
+Anyscale
+Together AI
+Groq
+Perplexity AI
+Character.AI
+Runway
+Synthesia
+ElevenLabs
+Jasper
+Copy.ai
+Glean
+Harvey
+Cursor
+Anysphere
+Sierra
+Decagon
+Adept
+Imbue
+Inflection AI
+Adept AI
+Pinecone
+Weaviate
+Chroma
+Qdrant
+LangChain
+LlamaIndex
+Weights & Biases
+Braintrust
+Humanloop
+Vellum
+Modal
+Replicate
+Baseten
+Fireworks AI
+DeepInfra
+OctoAI
+CoreWeave
+Lambda Labs
+Crusoe Energy
+Suno
+Udio
+Pika
+Luma AI
+Captions
+Descript
+Otter.ai
+AssemblyAI
+Deepgram
+Whisper
+Writer
+Typeface
+AI21 Labs
+Aleph Alpha
+LightOn
+Poolside
+Magic.dev
+Cognition
+Codeium
+Replit
+Sourcegraph
+Tabnine
+Qodo
+Factory
+Dust
+Vercel AI
+Twelve Labs
+Unstructured
+Weaviate
+Zilliz
+Timescale
+Neon
+Supabase

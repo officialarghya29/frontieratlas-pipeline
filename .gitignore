@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets - never commit
+.env
+.env.*
+!.env.example
+service_account.json
+credentials/
+*.pem
+*.key
+
+# Local data / runtime artifacts
+data/raw/*
+!data/raw/.gitkeep
+data/frontieratlas.db
+data/frontieratlas.db-*
+data/*.sqlite*
+data/processed/run_*.json
+data/processed/rejections_*.jsonl
+data/processed/junit.xml
+data/processed/pytest_output.txt
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

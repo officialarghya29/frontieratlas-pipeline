@@ -1,0 +1,201 @@
+# Source registry. Every entry below was probed live from this machine before
+# implementation (2026-11-21). Entries marked verified=false are documented as
+# unavailable and the collector is disabled rather than faked.
+
+startups:
+  yc_ai:
+    enabled: true
+    name: Y Combinator (AI tag, YC-OSS mirror)
+    url: https://yc-oss.github.io/api/tags/ai.json
+    directory_url: https://www.ycombinator.com/companies
+    access_method: public JSON API
+    authentication: none
+    terms_url: https://github.com/yc-oss/api
+    rate_limit: single static document, fetched once per run
+    verified: true
+    parser: yc_json
+    date_semantics: launched_at is a Unix epoch for company launch year; it is not used as a publication date.
+
+products:
+  producthunt:
+    enabled: true
+    name: Product Hunt (Atom feed)
+    url: https://www.producthunt.com/feed?category=ai-software
+    access_method: public Atom feed
+    authentication: none
+    terms_url: https://www.producthunt.com/legal
+    rate_limit: single feed fetch, no documented numeric limit
+    verified: true
+    parser: atom_feed
+    date_semantics: published is the Product Hunt launch timestamp with offset; updated is a feed update time and is never used for freshness.
+  showhn:
+    enabled: true
+    name: Hacker News "Show HN" (Algolia Search API)
+    url: https://hn.algolia.com/api/v1/search_by_date
+    access_method: public JSON API
+    authentication: none
+    terms_url: https://hn.algolia.com/api
+    rate_limit: unofficial; 0.5s between requests enforced client-side
+    verified: true
+    parser: algolia_show_hn
+    queries: ["AI", "LLM", "machine learning", "AI agent", "GPT", "computer vision"]
+    hits_per_page: 500
+    max_pages_per_query: 2
+    date_semantics: created_at is the submission timestamp (UTC); used as launch evidence only, not as a freshness field.
+  huggingface_spaces:
+    enabled: true
+    name: Hugging Face Spaces (public API)
+    url: https://huggingface.co/api/spaces
+    access_method: public JSON API
+    authentication: none
+    terms_url: https://huggingface.co/terms-of-service
+    rate_limit: 1 request/second enforced client-side
+    verified: true
+    parser: hf_spaces_json
+    date_semantics: createdAt/lastModified are platform timestamps, not commercial launch dates.
+
+papers:
+  arxiv:
+    enabled: true
+    name: arXiv
+    url: https://export.arxiv.org/api/query
+    access_method: public Atom API
+    authentication: none
+    terms_url: https://info.arxiv.org/help/api/tou.html
+    rate_limit: 3 seconds between requests (arXiv API guidance)
+    verified: true
+    parser: arxiv_atom
+    categories: [cs.AI, cs.LG, cs.CL, cs.CV, cs.RO]
+    batch_size: 200
+    max_results_per_category: 320
+    date_semantics: published is the paper submission timestamp from Atom; updated is a revision timestamp and is not used as publication date.
+  paperswithcode:
+    enabled: false
+    name: Papers with Code
+    url: https://paperswithcode.com/api/v1/papers/
+    access_method: formerly public API
+    authentication: none
+    terms_url: https://paperswithcode.com/
+    verified: false
+    disabled_reason: "Papers with Code was archived by Meta in 2025; the public API returns errors/no data. Not used. GitHub links are instead taken only from explicit arXiv abstract/comment evidence."
+
+news:
+  sources:
+    - key: techcrunch_ai
+      name: TechCrunch AI
+      feed_url: https://techcrunch.com/category/artificial-intelligence/feed/
+      publisher: TechCrunch
+      access_method: RSS
+      authentication: none
+      terms_url: https://techcrunch.com/terms-of-use/
+      date_field: published
+      verified: true
+    - key: theverge_ai
+      name: The Verge AI
+      feed_url: https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
+      publisher: The Verge
+      access_method: RSS
+      authentication: none
+      terms_url: https://www.voxmedia.com/legal/terms-of-use
+      date_field: published
+      verified: true
+    - key: wired_ai
+      name: WIRED AI
+      feed_url: https://www.wired.com/feed/tag/ai/latest/rss
+      publisher: WIRED
+      access_method: RSS
+      authentication: none
+      terms_url: https://www.condenast.com/user-agreement
+      date_field: published
+      verified: true
+    - key: arstechnica
+      name: Ars Technica
+      feed_url: https://feeds.arstechnica.com/arstechnica/technology-lab
+      publisher: Ars Technica
+      access_method: RSS
+      authentication: none
+      terms_url: https://arstechnica.com/terms-of-service/
+      date_field: published
+      verified: true
+    - key: mit_tech_review
+      name: MIT Technology Review
+      feed_url: https://www.technologyreview.com/feed/
+      publisher: MIT Technology Review
+      access_method: RSS
+      authentication: none
+      terms_url: https://www.technologyreview.com/terms-of-service/
+      date_field: published
+      verified: true
+
+jobs:
+  sources:
+    - key: himalayas
+      name: Himalayas
+      url: https://himalayas.app/jobs/api
+      access_method: public JSON API (cursor pagination)
+      authentication: none
+      terms_url: https://himalayas.app/terms
+      verified: true
+      parser: himalayas_json
+      date_field: pubDate
+      request_limit: 20
+      pages: 6
+    - key: remotive
+      name: Remotive
+      url: https://remotive.com/api/remote-jobs
+      access_method: public JSON API
+      authentication: none
+      terms_url: https://remotive.com/terms
+      verified: true
+      parser: remotive_json
+      date_field: publication_date
+      request_limit: 200
+      pages: 1
+    - key: remoteok
+      name: Remote OK
+      url: https://remoteok.com/api
+      access_method: public JSON API
+      authentication: none
+      terms_url: https://remoteok.com/terms
+      verified: true
+      parser: remoteok_json
+      date_field: date
+      request_limit: 1
+      pages: 1
+    - key: arbeitnow
+      name: Arbeitnow
+      url: https://www.arbeitnow.com/api/job-board-api
+      access_method: public JSON API
+      authentication: none
+      terms_url: https://www.arbeitnow.com/terms
+      verified: true
+      parser: arbeitnow_json
+      date_field: created_at
+      request_limit: 1
+      pages: 1
+    - key: jobicy
+      name: Jobicy
+      url: https://jobicy.com/api/v2/remote-jobs
+      access_method: public JSON API
+      authentication: none
+      terms_url: https://jobicy.com/terms
+      verified: true
+      parser: jobicy_json
+      date_field: pubDate
+      request_limit: 100
+      pages: 1
+  unavailable:
+    - key: aidevboard
+      name: AI Dev Jobs
+      url: https://aidevboard.com/
+      access_method: public HTML
+      verified: false
+      disabled_reason: "Probed live: the public board reported 0 AI developer jobs (empty index), so it cannot supply verified 24h listings. Excluded and documented."
+
+github:
+  api_url: https://api.github.com
+  token_env: GITHUB_TOKEN
+  max_repositories_per_run: 400
+  concurrency: 4
+  access_method: public REST API with optional token
+  terms_url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service

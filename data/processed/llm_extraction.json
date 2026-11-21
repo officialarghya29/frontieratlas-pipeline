@@ -1,0 +1,10 @@
+{
+  "status": "pending",
+  "record_type": "PRODUCT",
+  "attempted": 0,
+  "successes": 0,
+  "failures": 0,
+  "updated": 0,
+  "provider_health": [],
+  "reason": "No provider credentials: set GEMINI_API_KEY, GROQ_API_KEY or DEEPSEEK_API_KEY. Records and raw content are preserved; no field was guessed."
+}

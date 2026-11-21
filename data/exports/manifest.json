@@ -1,0 +1,190 @@
+{
+  "generated_at": "2026-11-21T07:32:14Z",
+  "database": "/home/arghya/Projects/ai signal project/data/frontieratlas.db",
+  "tabs": {
+    "STARTUP": {
+      "tab_name": "Startups",
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "entityName",
+        "employeeCount",
+        "website",
+        "description",
+        "foundedYear",
+        "industry",
+        "headquarters",
+        "recordUrl",
+        "collectedAt"
+      ],
+      "rows": 1894,
+      "csv": "startups.csv",
+      "jsonl": "startups.jsonl"
+    },
+    "PRODUCT": {
+      "tab_name": "Products",
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "entityName",
+        "startupName",
+        "pricingModel",
+        "productUrl",
+        "description",
+        "category",
+        "recordUrl",
+        "collectedAt"
+      ],
+      "rows": 2490,
+      "csv": "products.csv",
+      "jsonl": "products.jsonl"
+    },
+    "RESEARCH_PAPER": {
+      "tab_name": "Research Papers",
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "title",
+        "authors",
+        "paper_url",
+        "github_url",
+        "github_stars",
+        "github_checked_at",
+        "published_date",
+        "abstract",
+        "recordUrl",
+        "githubEvidenceUrl",
+        "collectedAt"
+      ],
+      "rows": 1314,
+      "csv": "research_papers.csv",
+      "jsonl": "research_papers.jsonl"
+    },
+    "JOB": {
+      "tab_name": "Jobs",
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "company",
+        "date",
+        "is_remote",
+        "role_family",
+        "title",
+        "job_url",
+        "recordUrl",
+        "dateEvidence",
+        "freshness_verified",
+        "collectedAt"
+      ],
+      "rows": 214,
+      "csv": "jobs.csv",
+      "jsonl": "jobs.jsonl"
+    },
+    "NEWS": {
+      "tab_name": "News",
+      "headers": [
+        "schemaVersion",
+        "recordType",
+        "record_id",
+        "source_name",
+        "source_url",
+        "title",
+        "date",
+        "publisher",
+        "full_text",
+        "summary",
+        "article_url",
+        "recordUrl",
+        "dateEvidence",
+        "freshness_verified",
+        "extraction_status",
+        "collectedAt"
+      ],
+      "rows": 16,
+      "csv": "news.csv",
+      "jsonl": "news.jsonl"
+    },
+    "ENTITY_MAPPING": {
+      "tab_name": "Entity Mapping Log",
+      "headers": [
+        "raw_name",
+        "canonical_name",
+        "entity_type",
+        "source_url",
+        "method",
+        "similarity_score",
+        "decision",
+        "review_required",
+        "mapped_at",
+        "notes"
+      ],
+      "rows": 2490,
+      "csv": "entity_mapping_log.csv",
+      "jsonl": "entity_mapping_log.jsonl"
+    }
+  },
+  "files": {
+    "startups.csv": {
+      "bytes": 1397512,
+      "sha256": "85357a28d1b4c41771245cff5265c6f424f7b9b29ad3390a513923bafccacfb0"
+    },
+    "startups.jsonl": {
+      "bytes": 1909692,
+      "sha256": "4ab5f10e52f90376c654646d62bfaedb0e90c21508d790119544e88a2cee5139"
+    },
+    "products.csv": {
+      "bytes": 1545066,
+      "sha256": "0d509ff4a2d48bf0b5481782a6b5e017944d9551af3e22f87440256b6ebe941e"
+    },
+    "products.jsonl": {
+      "bytes": 2176990,
+      "sha256": "6de6b7cb6e2cad09a5653cdb04b13de0ffe4556f52b02e3a952f930640a5df56"
+    },
+    "research_papers.csv": {
+      "bytes": 2360381,
+      "sha256": "fd058a4d1b240f26c8d522deb1be02b77812ef2a2edf29dde4202f956070bc98"
+    },
+    "research_papers.jsonl": {
+      "bytes": 2789564,
+      "sha256": "d18cee7793789f2a97d587fbd2f362efb706bcafafd8fb1fb0480cbeb42df592"
+    },
+    "jobs.csv": {
+      "bytes": 86046,
+      "sha256": "a1cd99fad8cbfc0280a11971b93b2755ee5851615b126984cc91fb74722a795d"
+    },
+    "jobs.jsonl": {
+      "bytes": 144430,
+      "sha256": "a752777b399df75554715adb2559fec04abb93d76d243dc7d51e8b41871ac432"
+    },
+    "news.csv": {
+      "bytes": 58235,
+      "sha256": "42897294139e9095a46f7107502efa177a7b85d7dc8509ba7c2b477aa8819545"
+    },
+    "news.jsonl": {
+      "bytes": 62847,
+      "sha256": "ff97a29c1b2520edcd1bb77089afbc12c7ff7cfb2f673f9034c38a68ba7ce2ee"
+    },
+    "entity_mapping_log.csv": {
+      "bytes": 577767,
+      "sha256": "96e8e0702f9d23c41ee62d8789cd42adb7434896645340a35335b1e4a1409916"
+    },
+    "entity_mapping_log.jsonl": {
+      "bytes": 999816,
+      "sha256": "a82259441a4454683014950d58ac386c01c9c88d3c346791da2d72a856de53cf"
+    }
+  },
+  "total_records": 5928,
+  "entity_mappings": 2490
+}
