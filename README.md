@@ -313,7 +313,7 @@ The chart generator reads `data/exports/*.csv` and `data_quality_report.json`; t
 
 - A small review screen for the 71 entity candidates, with the source URL, candidate domain and evidence note beside each decision.
 - A production PostgreSQL path with a durable queue and source-partitioned workers, validated at 500k records rather than claimed.
-- Evidence-backed LLM extraction once a provider key is available, with the same “no evidence, no update” rule.
+- Evidence-backed LLM extraction once a provider key is available, with the same “no evidence, no change” rule.
 - Richer product descriptions, but only from sources that actually publish them.
 
 ## Provenance

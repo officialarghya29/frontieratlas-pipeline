@@ -9,7 +9,7 @@ Every visual in this folder is generated from the committed FrontierAtlas run. T
 | `02_source_yield_comparison.png` | Accepted / discovered yield for all 15 sources | `sources[]` |
 | `03_entity_resolution_split.png` | Auto / review / no-match split and method counts | `entity_resolution` |
 | `04_freshness_window.png` | Publication age of every accepted job and news item | `jobs.csv`, `news.csv` |
-| `05_targets_vs_actual.png` | Assignment targets compared with actual output | `targets` |
+| `05_targets_vs_actual.png` | Collection targets compared with actual output | `targets` |
 | `06_startup_industry_mix.png` | YC AI startup industry distribution | `startups.csv` |
 | `07_pipeline_architecture.png` | Implemented pipeline boundaries | repository modules |
 | `08_workbook_map.png` | Six tabs and reconciliation totals for the workbook | `data_quality_report.json` |

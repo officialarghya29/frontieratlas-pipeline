@@ -15,7 +15,7 @@ The submission packet with longer answers is `03_SUBMISSION_PACKET.md`. The form
 
 <https://forms.gle/3JJhukomumTFueRW7>
 
-> There is no public Google Sheet URL in this folder yet. I did not invent one. The workbook is the file that becomes the Sheet.
+> There is no public Google Sheet URL in this folder yet. No URL was invented. The workbook is the file that becomes the Sheet.
 
 ## Publish the Sheet in five steps
 

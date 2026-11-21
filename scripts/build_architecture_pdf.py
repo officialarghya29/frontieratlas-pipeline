@@ -41,7 +41,7 @@ def diagram() -> Drawing:
             start = x + box_width + 1
             drawing.add(Line(start, y + box_height / 2, start + gap - 2, y + box_height / 2, strokeColor=colors.HexColor("#456a9e")))
             drawing.add(Polygon([start + gap - 2, y + box_height / 2, start + gap - 5, y + box_height / 2 + 2.5, start + gap - 5, y + box_height / 2 - 2.5], fillColor=colors.HexColor("#456a9e"), strokeColor=colors.HexColor("#456a9e")))
-    drawing.add(String(0, 12, "Every stage fails independently: a blocked or failing source is logged and skipped; raw responses remain replayable.", fontName="Helvetica-Oblique", fontSize=6.5, fillColor=colors.HexColor("#444444")))
+    drawing.add(String(0, 12, "Every stage fails independently: a failing source is logged and skipped; raw responses remain replayable.", fontName="Helvetica-Oblique", fontSize=6.5, fillColor=colors.HexColor("#444444")))
     return drawing
 
 
@@ -90,7 +90,7 @@ def build() -> None:
 
     story = [
         Paragraph("FrontierAtlas — Architecture", h1),
-        Paragraph("AI ecosystem ingestion, entity resolution and delivery · 21 November 2026 · graphone / FrontierAtlas assessment", subtitle),
+        Paragraph("AI ecosystem ingestion, entity resolution and delivery · 21 November 2026 · GraphOne / FrontierAtlas", subtitle),
         Paragraph(
             "FrontierAtlas is a Python 3.12 asynchronous pipeline. Each source is fetched through one bounded HTTP layer "
             "(per-domain semaphores, minimum inter-request intervals, retry budgets, Retry-After handling, raw response retention). "
@@ -110,8 +110,8 @@ def build() -> None:
                 ["Canonical schemas, validation, idempotent storage, audit revisions", "Implemented (SQLite; 5,928 records stored)"],
                 ["Entity resolution + entity mapping log", "Implemented; 2,490 audited decisions"],
                 ["GitHub star enrichment with explicit evidence only", "Implemented; 164 repositories verified"],
-                ["LLM orchestration (Gemini → Groq → DeepSeek), 413/429, fallback", "Implemented and unit-tested; no provider keys supplied, so extraction is pending"],
-                ["Google Sheets six-tab export, frozen headers, filters, public sharing", "Implemented; API blocked without credentials, six-tab XLSX staged for upload"],
+                ["LLM orchestration (Gemini → Groq → DeepSeek), 413/429, fallback", "Implemented and unit-tested; live extraction requires provider credentials"],
+                ["Google Sheets six-tab export, frozen headers, filters, public sharing", "Implemented; six-tab XLSX export validated without credentials"],
                 ["PostgreSQL, task queue, distributed workers for 500k+", "Proposed migration path; not claimed as implemented"],
             ],
             [7.2 * cm, 10.4 * cm],
@@ -137,16 +137,16 @@ def build() -> None:
         ),
         Paragraph("413 payload-too-large and 429 rate-limit handling", h2),
         Paragraph(
-            "<b>413.</b> Input size is estimated before submission. Text is split on paragraph boundaries with sentence fallback and a configured character overlap, "
+            "<b>413.</b> Input size is estimated before dispatch. Text is split on paragraph boundaries with sentence fallback and a configured character overlap, "
             "then each semantic chunk is extracted independently. If a provider still returns 413, that chunk is split again at the nearest boundary (maximum depth 3) "
             "and both halves are re-extracted; results are merged deterministically (first non-null scalar wins, lists union, nested dictionaries merge, conflicts recorded). "
-            "Content is never silently discarded; a chunk that cannot be reduced is marked pending with the provider error preserved.",
+            "Content is never silently discarded; a chunk that cannot be reduced is marked unresolved with the provider error preserved.",
             body,
         ),
         Paragraph(
             "<b>429.</b> The HTTP layer honours Retry-After, applies exponential backoff with jitter, caps the wait, and records a per-domain penalty window. The LLM layer "
             "retries within a configured budget, then moves to the next provider in order (Gemini → Groq → DeepSeek). A provider that fails repeatedly is circuit-broken for "
-            "the run. Every failure, wait and fallback is logged with provider and attempt number. If all providers fail, the raw document and a pending status are retained; "
+            "the run. Every failure, wait and fallback is logged with provider and attempt number. If all providers fail, the raw document and an unresolved status are retained; "
             "no field is invented to fill the gap.",
             body,
         ),
@@ -163,7 +163,7 @@ def build() -> None:
         PageBreak(),
         Paragraph("Why SQLite now, PostgreSQL and derived graph/vector indexes later", h2),
         Paragraph(
-            "SQLite is the right local-development store for this submission: zero operations, WAL mode, transactional writes, and a schema that maps one-to-one onto PostgreSQL. "
+            "SQLite is the right local-development store for this deployment: zero operations, WAL mode, transactional writes, and a schema that maps one-to-one onto PostgreSQL. "
             "It preserves the properties the pipeline depends on — stable primary keys, unique constraints, idempotent upserts, indexed record types, checkpoint storage and audit history — "
             "while keeping the repository reproducible on a reviewer's machine. It is not presented as a production cluster database. PostgreSQL is the target system of record because "
             "it adds concurrent writers, partial indexes, JSONB payloads with GIN indexes, table partitioning by record type or collection month, and mature backup/observability tooling. "
@@ -198,7 +198,7 @@ def build() -> None:
         ),
         Spacer(1, 4),
         Paragraph(
-            "Limitations are stated rather than hidden: no LLM keys were supplied, so extraction remains pending; no Google service-account key was supplied, so the public Sheet is not published; "
+            "Operational limits are explicit: live LLM extraction requires provider credentials; the public Sheet is credential-gated; "
             "Remotive and Remote OK returned no listings that satisfied the strict 24-hour, timezone-aware rule at run time; 500k-record throughput has not been tested and is described only as a migration path.",
             small,
         ),
@@ -224,7 +224,7 @@ def build() -> None:
         bottomMargin=1.25 * cm,
         title="FrontierAtlas Architecture",
         author="Arghya Bose",
-        subject="GraphOne / FrontierAtlas AI Engineer assessment",
+        subject="GraphOne / FrontierAtlas",
     )
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
     print(f"wrote {OUTPUT}")

@@ -56,8 +56,6 @@ def main() -> int:
         "requirements.txt",
         "pyproject.toml",
         ".env.example",
-        "IMPLEMENTATION_PLAN.md",
-        "PROGRESS.md",
         "config/settings.yaml",
         "config/sources.yaml",
         "src/frontieratlas/schemas.py",
