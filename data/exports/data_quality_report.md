@@ -1,6 +1,6 @@
 # FrontierAtlas Data Quality Report
 
-Generated: 2026-11-21T07:32:14Z
+Generated: 2026-11-21T07:43:17Z
 Collection run: final-20261121 (completed)
 
 ## Dataset counts

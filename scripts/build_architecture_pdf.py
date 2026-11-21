@@ -92,7 +92,7 @@ def build() -> None:
                 ["Entity resolution + entity mapping log", "Implemented; 2,490 audited decisions"],
                 ["GitHub star enrichment with explicit evidence only", "Implemented; 164 repositories verified"],
                 ["LLM orchestration (Gemini → Groq → DeepSeek), 413/429, fallback", "Implemented and unit-tested; no provider keys supplied, so extraction is pending"],
-                ["Google Sheets six-tab export, frozen headers, filters, public sharing", "Implemented; blocked at runtime by missing service-account credentials"],
+                ["Google Sheets six-tab export, frozen headers, filters, public sharing", "Implemented; API blocked without credentials, six-tab XLSX staged for upload"],
                 ["PostgreSQL, task queue, distributed workers for 500k+", "Proposed migration path; not claimed as implemented"],
             ],
             [7.2 * cm, 10.4 * cm],

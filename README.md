@@ -88,11 +88,14 @@ scripts/
   extract_llm.py   conservative LLM extraction (pending without keys)
   export_all.py    six CSV/JSONL datasets + manifest
   export_sheets.py six-tab Sheet creation, formatting, public sharing
+  build_submission_workbook.py  six-tab XLSX for Google Sheets upload
   validate_all.py  schema revalidation + quality report
+  verify_submission.py  full pre-submission preflight
   benchmark.py     measured local write throughput
   build_architecture_pdf.py
 tests/unit/        53 tests, mocked HTTP only
-data/exports/      committed deliverables and quality report
+data/exports/      committed deliverables, workbook and quality report
+SUBMISSION.md      copy-paste submission packet and publishing steps
 ```
 
 ## Data sources
@@ -197,6 +200,12 @@ python scripts/validate_all.py
 # CSV + JSONL for all six deliverables, plus manifest with SHA-256
 python scripts/export_all.py
 
+# Credential-free six-tab workbook for Google Sheets upload
+python scripts/build_submission_workbook.py
+
+# Preflight every submission requirement (counts, schemas, PDF, tests, identity, secrets)
+python scripts/verify_submission.py
+
 # Measured local upsert throughput (synthetic rows, isolated DB, deleted after)
 python scripts/benchmark.py
 
@@ -228,7 +237,26 @@ python scripts/export_sheets.py
 
 Required Google setup: create a service account, enable the **Google Sheets API** and **Google Drive API**, download the JSON key outside the repository, and grant that service account access if reusing an existing spreadsheet.
 
-**Current status:** blocked — `GOOGLE_APPLICATION_CREDENTIALS` is not set on this machine. No public Sheet URL is claimed. The six CSVs and JSONL files are complete and committed.
+### Fastest path (no Google Cloud setup)
+
+`data/exports/FrontierAtlas_submission.xlsx` is a styled, six-tab workbook ready for upload:
+
+1. Upload it to Google Drive.
+2. Right-click → **Open with** → **Google Sheets** (save as a Google Sheet if prompted).
+3. **Share** → **General access** → **Anyone with the link** → **Viewer**.
+4. Paste the Sheet URL into the submission form.
+
+Verify the six tab names and these row counts: Startups 1,894; Products 2,490; Research Papers 1,314; Jobs 214; News 16; Entity Mapping Log 2,490.
+
+### API path (automatic)
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="/secure/path/service-account.json"
+python scripts/export_sheets.py            # creates, populates, publishes, prints URL
+python scripts/export_sheets.py --dry-run  # validate payloads without credentials
+```
+
+**Current status:** the API export is **blocked** because `GOOGLE_APPLICATION_CREDENTIALS` is not set on this machine, so no Sheet URL is claimed here. The staging workbook and all CSV/JSONL exports are complete and committed.
 
 ## Data integrity rules enforced
 
@@ -249,7 +277,7 @@ At run time: 2,490 products produced 10 auto-matches (6 domain, 4 alias), 67 rev
 
 ## Known limitations
 
-1. **Google Sheet not published** — no service-account credentials were supplied. This is the only unfinished submission step.
+1. **Google Sheet not yet published** — no service-account credentials were supplied, so the API export could not run. A complete six-tab XLSX staging workbook is provided; uploading and sharing it is the only remaining submission step.
 2. **LLM extraction not executed** — implemented with Gemini→Groq→DeepSeek fallback, 413 chunking and 429 backoff, and unit-tested with mocked providers, but no API keys were supplied. Records remain valid with deterministic fields; pricing is `UNKNOWN` where unverified.
 3. **Remotive and Remote OK produced zero accepted jobs** — Remotive's `publication_date` has no timezone (cannot be 24h-verified), and Remote OK's listings were all older than 24h at run time. Both remain monitored and documented rather than relaxed.
 4. **Product quality is source-shaped** — Show HN and HF Spaces are public launch/app sources, not a commercial product database. Product Hunt's public feed supplied only 19 AI-relevant launches. Pricing is therefore mostly `UNKNOWN`.
@@ -262,7 +290,7 @@ At run time: 2,490 products produced 10 auto-matches (6 domain, 4 alias), 67 rev
 
 ## Implemented vs proposed
 
-**Implemented:** async source collection; bounded concurrency and pacing; retries/backoff/Retry-After; checkpoints; raw retention; cross-source dedupe; strict schemas; idempotent upserts; revision audit; GitHub enrichment; entity resolution and mapping log; LLM provider abstraction with 413/429/fallback; CSV/JSONL export; six-tab Sheets exporter with formatting/publication guard; quality report; 53 automated tests; three-page architecture PDF.
+**Implemented:** async source collection; bounded concurrency and pacing; retries/backoff/Retry-After; checkpoints; raw retention; cross-source dedupe; strict schemas; idempotent upserts; revision audit; GitHub enrichment; entity resolution and mapping log; LLM provider abstraction with 413/429/fallback; CSV/JSONL export; six-tab Sheets exporter with formatting/publication guard; credential-free six-tab XLSX workbook; pre-submission verifier; quality report; 53 automated tests; three-page architecture PDF.
 
 **Proposed / not implemented:** PostgreSQL production deployment, durable queue, distributed workers, 500k-record throughput validation, graph database projection, vector search for entity retrieval, automated manual-review UI.
 
@@ -278,9 +306,11 @@ python scripts/resolve_entities.py
 python scripts/extract_llm.py             # pending without LLM keys
 python scripts/export_all.py
 python scripts/validate_all.py
+python scripts/build_submission_workbook.py
 pytest
 python scripts/build_architecture_pdf.py
-python scripts/export_sheets.py           # needs service-account credentials
+python scripts/verify_submission.py
+python scripts/export_sheets.py           # optional API path; needs service-account credentials
 ```
 
 ## Source attribution
@@ -289,4 +319,4 @@ Data remains attributable to its publishers: Y Combinator (via the YC-OSS mirror
 
 ## Final submission form
 
-The form at `https://forms.gle/3JJhukomumTFueRW7` has **not** been submitted automatically; it requires the owner's account and final confirmation. The repository and dataset are ready, but the Sheet URL and any LLM-extracted fields remain pending the credentials noted above.
+The form at `https://forms.gle/3JJhukomumTFueRW7` has **not** been submitted automatically; it requires the owner's account and final confirmation. Copy-paste answers, Sheet publishing steps and remaining credential-gated actions are in [`SUBMISSION.md`](SUBMISSION.md).

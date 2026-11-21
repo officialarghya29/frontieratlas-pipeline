@@ -1,0 +1,90 @@
+{
+  "ready_to_submit_local": true,
+  "repository": "https://github.com/officialarghya29/frontieratlas-pipeline.git",
+  "counts": {
+    "JOB": 214,
+    "NEWS": 16,
+    "PRODUCT": 2490,
+    "RESEARCH_PAPER": 1314,
+    "STARTUP": 1894
+  },
+  "entity_mappings": 2490,
+  "pdf_pages": 3,
+  "tests": {
+    "passed": 53,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "total": 53,
+    "source": "pytest --junitxml data/processed/junit.xml"
+  },
+  "sheet_api_ready": false,
+  "llm_ready": false,
+  "workbook": "data/exports/FrontierAtlas_submission.xlsx",
+  "external_actions_required": [
+    "Google Sheet: upload data/exports/FrontierAtlas_submission.xlsx to Google Drive, open with Google Sheets, share 'Anyone with the link' (Viewer), paste the URL into the form.",
+    "LLM extraction: set GEMINI_API_KEY/GROQ_API_KEY/DEEPSEEK_API_KEY and run python scripts/extract_llm.py, then re-export and rebuild the workbook."
+  ],
+  "checks": [
+    {
+      "check": "required files",
+      "ok": true,
+      "detail": "all present"
+    },
+    {
+      "check": "record targets",
+      "ok": true,
+      "detail": "counts={'JOB': 214, 'NEWS': 16, 'PRODUCT': 2490, 'RESEARCH_PAPER': 1314, 'STARTUP': 1894}"
+    },
+    {
+      "check": "schema validation",
+      "ok": true,
+      "detail": "0 issue(s)"
+    },
+    {
+      "check": "24h freshness flags",
+      "ok": true,
+      "detail": "all job/news records verified"
+    },
+    {
+      "check": "six sheet tabs",
+      "ok": true,
+      "detail": "tabs=['Startups', 'Products', 'Research Papers', 'Jobs', 'News', 'Entity Mapping Log']"
+    },
+    {
+      "check": "export secret scan",
+      "ok": true,
+      "detail": "findings=[]"
+    },
+    {
+      "check": "workbook tabs",
+      "ok": true,
+      "detail": "tabs=['Startups', 'Products', 'Research Papers', 'Jobs', 'News', 'Entity Mapping Log']"
+    },
+    {
+      "check": "architecture PDF",
+      "ok": true,
+      "detail": "3 page(s)"
+    },
+    {
+      "check": "automated tests",
+      "ok": true,
+      "detail": "{'passed': 53, 'failed': 0, 'errors': 0, 'skipped': 0, 'total': 53, 'source': 'pytest --junitxml data/processed/junit.xml'}"
+    },
+    {
+      "check": "commit identity",
+      "ok": true,
+      "detail": "Arghya Bose <officialarghya29@gmail.com>"
+    },
+    {
+      "check": "no AI attribution",
+      "ok": true,
+      "detail": "commit message clean"
+    },
+    {
+      "check": "repository secret scan",
+      "ok": true,
+      "detail": "0 finding(s)"
+    }
+  ]
+}

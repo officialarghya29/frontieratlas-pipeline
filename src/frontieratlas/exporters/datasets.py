@@ -15,6 +15,7 @@ from typing import Any, Iterable
 
 from ..common.config import AppSettings
 from ..common.ids import iso_now
+from ..common.text import remove_control_chars
 from ..storage.db import Database
 
 TAB_TYPES = ["STARTUP", "PRODUCT", "RESEARCH_PAPER", "JOB", "NEWS", "ENTITY_MAPPING"]
@@ -144,10 +145,10 @@ def format_cell(value: Any) -> str:
     if isinstance(value, bool):
         return "true" if value else "false"
     if isinstance(value, (list, tuple)):
-        return "; ".join(str(item) for item in value)
+        return "; ".join(remove_control_chars(str(item)) for item in value)
     if isinstance(value, dict):
-        return json.dumps(value, ensure_ascii=False, sort_keys=True)
-    return str(value)
+        return remove_control_chars(json.dumps(value, ensure_ascii=False, sort_keys=True))
+    return remove_control_chars(str(value))
 
 
 def headers_for(record_type: str) -> list[str]:

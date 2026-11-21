@@ -61,6 +61,7 @@ LEGAL_SUFFIX_TOKENS = {
 }
 
 _WHITESPACE_RE = re.compile(r"\s+")
+_CONTROL_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 _NON_WORD_RE = re.compile(r"[^0-9a-z ]+")
 _GITHUB_RE = re.compile(r"https?://(?:www\.)?github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", re.IGNORECASE)
 
@@ -73,7 +74,13 @@ def strip_html(value: str | None) -> str | None:
         node.decompose()
     text = soup.get_text(" ", strip=True)
     text = _WHITESPACE_RE.sub(" ", html.unescape(text)).strip()
-    return text or None
+    return remove_control_chars(text) or None
+
+
+def remove_control_chars(value: str) -> str:
+    """Remove XML/Sheets-illegal control characters without altering visible text."""
+
+    return _CONTROL_RE.sub("", value)
 
 
 def normalize_unicode(value: str) -> str:
@@ -173,7 +180,7 @@ def truncate(value: str | None, limit: int) -> str | None:
 def collapse_whitespace(value: str | None) -> str | None:
     if value is None:
         return None
-    return _WHITESPACE_RE.sub(" ", value).strip() or None
+    return _WHITESPACE_RE.sub(" ", remove_control_chars(value)).strip() or None
 
 
 def extract_github_urls(*texts: str | None) -> list[str]:

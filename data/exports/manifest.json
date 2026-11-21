@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T07:32:14Z",
+  "generated_at": "2026-11-21T07:43:16Z",
   "database": "/home/arghya/Projects/ai signal project/data/frontieratlas.db",
   "tabs": {
     "STARTUP": {
@@ -137,8 +137,8 @@
   },
   "files": {
     "startups.csv": {
-      "bytes": 1397512,
-      "sha256": "85357a28d1b4c41771245cff5265c6f424f7b9b29ad3390a513923bafccacfb0"
+      "bytes": 1397511,
+      "sha256": "40f623f9d1ef37602eaf93b954b635184859d7eb4459d66d391c25ade11a1848"
     },
     "startups.jsonl": {
       "bytes": 1909692,

@@ -16,6 +16,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from ..common.config import AppSettings
+from ..common.text import remove_control_chars
 from ..exporters.datasets import TAB_TYPES, headers_for, rows_for
 from ..quality.safety import scan_rows
 from ..storage.db import Database
@@ -32,8 +33,10 @@ class MissingCredentials(RuntimeError):
 
 
 def _cell(value: Any) -> Any:
-    if isinstance(value, str) and len(value) > CELL_CHAR_LIMIT:
-        return value[: CELL_CHAR_LIMIT - 1] + "…"
+    if isinstance(value, str):
+        value = remove_control_chars(value)
+        if len(value) > CELL_CHAR_LIMIT:
+            return value[: CELL_CHAR_LIMIT - 1] + "…"
     return value
 
 
@@ -73,10 +76,15 @@ def _services():
     return sheets, drive
 
 
-def export_to_sheets(settings: AppSettings, db: Database, *, share_public: bool = True) -> dict:
-    payloads = build_payloads(settings, db)
+def scan_payloads(payloads: dict[str, dict]) -> list[str]:
     findings = scan_rows([payload["headers"] for payload in payloads.values()])
     findings += scan_rows([row for payload in payloads.values() for row in payload["rows"]])
+    return sorted(set(findings))
+
+
+def export_to_sheets(settings: AppSettings, db: Database, *, share_public: bool = True) -> dict:
+    payloads = build_payloads(settings, db)
+    findings = scan_payloads(payloads)
     if findings:
         raise ValueError(f"refusing to publish: credential-shaped content found: {', '.join(findings)}")
 
@@ -165,6 +173,7 @@ def export_to_sheets(settings: AppSettings, db: Database, *, share_public: bool 
     ).execute()
 
     published = False
+    public_error: str | None = None
     if share_public:
         try:
             drive.permissions().create(
@@ -174,18 +183,32 @@ def export_to_sheets(settings: AppSettings, db: Database, *, share_public: bool 
             ).execute()
             published = True
         except HttpError as exc:  # permission failure must be reported, not hidden
-            published = False
-            find_public_error = str(exc)
-        else:
-            find_public_error = None
+            public_error = str(exc)
     else:
-        find_public_error = "public sharing disabled by flag"
+        public_error = "public sharing disabled by flag"
+
+    share_with = os.environ.get("GOOGLE_SHEETS_SHARE_WITH", "").strip()
+    shared_with: str | None = None
+    share_error: str | None = None
+    if share_with:
+        try:
+            drive.permissions().create(
+                fileId=spreadsheet_id,
+                body={"type": "user", "role": "writer", "emailAddress": share_with},
+                sendNotificationEmail=False,
+                fields="id",
+            ).execute()
+            shared_with = share_with
+        except HttpError as exc:
+            share_error = str(exc)
 
     return {
         "spreadsheet_id": spreadsheet_id,
         "url": f"https://docs.google.com/spreadsheets/d/{spreadsheet_id}/edit",
         "created": created,
         "public": published,
-        "public_error": find_public_error,
+        "public_error": public_error,
+        "shared_with": shared_with,
+        "share_error": share_error,
         "tabs": {tab: {"rows": len(payload["rows"]), "columns": len(payload["headers"])} for tab, payload in payloads.items()},
     }
